@@ -47,11 +47,17 @@ export default (state = initialState, action = {}) => {
         events: [...state.events, action.payload]
       };
     case "TICKET_DELETED":
+      console.log("ticket deleted reducer");
       const ticketIdDeleted = action.payload;
       const updatedTickets = state.tickets.filter(
         ticket => ticket.id !== ticketIdDeleted
       );
+      return {
+        ...state,
+        tickets: updatedTickets
+      };
     case "EVENT_DELETED":
+      console.log("event deleted reducer");
       const eventIdDeleted = action.payload;
       const updatedEvents = state.events.filter(
         event => event.id !== eventIdDeleted
