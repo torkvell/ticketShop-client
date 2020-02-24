@@ -1,11 +1,11 @@
-import React, { Component } from "./node_modules/react";
+import React, { Component } from "react";
 import TicketForm from "./MyTicketTable";
 import {
   createTicket,
   deleteTicket,
   getMyTickets
 } from "../../../redux/user/actions";
-import { connect } from "./node_modules/react-redux";
+import { connect } from "react-redux";
 
 class MyTicketContainer extends Component {
   state = {};

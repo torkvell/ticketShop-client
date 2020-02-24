@@ -6,7 +6,7 @@ import SignUpContainer from "./components/user/signup/SignUpContainer";
 import Homepage from "./components/homepage/";
 import Shop from "./components/shop/";
 import Cart from "./components/cart/";
-import MyTicketContainer from "./components/user/mytickets/MyTicketContainer";
+import MyTicketContainer from "./components/user/myTickets/MyTicketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
 import "./App.css";
 
