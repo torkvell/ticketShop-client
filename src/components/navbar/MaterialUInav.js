@@ -22,6 +22,7 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import StarIcon from "@material-ui/icons/Star";
+import EventIcon from "@material-ui/icons/Event";
 
 const useStyles = makeStyles(theme => ({
   navWrapper: {
@@ -134,18 +135,24 @@ export default function PrimarySearchAppBar(props) {
           <MenuItem onClick={handleMenuClose}>
             <PermIdentityOutlinedIcon></PermIdentityOutlinedIcon>
             <Link className={classes.navLink} to="/profile">
-              Profile
+              &nbsp;&nbsp;Profile
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <ListAltIcon></ListAltIcon>
             <Link className={classes.navLink} to="/mytickets">
-              My tickets
+              &nbsp;&nbsp;My tickets
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <EventIcon></EventIcon>
+            <Link className={classes.navLink} to="/myevents">
+              &nbsp;&nbsp;My Events
             </Link>
           </MenuItem>
           <MenuItem onClick={props.logOut}>
             <ExitToAppOutlinedIcon />
-            Log Out
+            &nbsp;&nbsp;Log Out
           </MenuItem>
         </div>
       ) : (
@@ -218,6 +225,12 @@ export default function PrimarySearchAppBar(props) {
             <ListAltIcon></ListAltIcon>
             <Link className={classes.navLink} to="/mytickets">
               &nbsp;&nbsp;My tickets
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <EventIcon></EventIcon>
+            <Link className={classes.navLink} to="/myevents">
+              &nbsp;&nbsp;My Events
             </Link>
           </MenuItem>
           <MenuItem onClick={props.logOut}>

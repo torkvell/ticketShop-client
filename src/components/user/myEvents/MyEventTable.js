@@ -2,8 +2,8 @@ import React from "react";
 import MaterialTable from "material-table";
 import Container from "@material-ui/core/Container";
 
-export default function TicketTable(props) {
-  console.log("TicketTable props:", props);
+export default function EventTable(props) {
+  console.log("MyEventTable props:", props);
   const [state, setState] = React.useState({
     columns: [
       { title: "ID", field: "id" },
@@ -11,21 +11,21 @@ export default function TicketTable(props) {
       { title: "Price", field: "price", type: "numeric" },
       { title: "Image URL", field: "imageURL" }
     ],
-    data: props.user.tickets.map(ticket => {
+    data: props.user.events.map(event => {
       return {
-        id: ticket.id,
-        description: ticket.description,
-        price: ticket.price,
-        imageURL: ticket.imageUrl
+        id: event.id,
+        description: event.description,
+        price: event.price,
+        imageURL: event.imageUrl
       };
     })
   });
-  let data = props.user.tickets.map(ticket => {
+  let data = props.user.events.map(event => {
     return {
-      id: ticket.id,
-      description: ticket.description,
-      price: ticket.price,
-      imageURL: ticket.imageUrl
+      id: event.id,
+      description: event.description,
+      price: event.price,
+      imageURL: event.imageUrl
     };
   });
   console.log(data);
@@ -33,7 +33,7 @@ export default function TicketTable(props) {
   return (
     <Container>
       <MaterialTable
-        title="My Tickets"
+        title="My Events"
         columns={state.columns}
         data={state.data}
         editable={{
@@ -47,7 +47,7 @@ export default function TicketTable(props) {
                   return { ...prevState, data };
                 });
               }, 600);
-              props.createTicket(
+              props.createEvent(
                 newData.description,
                 newData.price,
                 newData.imageURL,
@@ -78,7 +78,7 @@ export default function TicketTable(props) {
                   return { ...prevState, data };
                 });
                 console.log(oldData);
-                props.deleteTicket(oldData.id, props.user.token);
+                props.deleteEvent(oldData.id, props.user.token);
               }, 600);
             })
         }}

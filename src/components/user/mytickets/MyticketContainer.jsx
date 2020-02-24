@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from "./node_modules/react";
 import TicketForm from "./MyTicketTable";
 import {
   createTicket,
   deleteTicket,
   getMyTickets
 } from "../../../redux/user/actions";
-import { connect } from "react-redux";
+import { connect } from "./node_modules/react-redux";
 
-class MyticketContainer extends Component {
+class MyTicketContainer extends Component {
   state = {};
 
   componentDidMount = () => {
@@ -43,4 +43,4 @@ export default connect(mapStateToProps, {
   createTicket,
   deleteTicket,
   getMyTickets
-})(MyticketContainer);
+})(MyTicketContainer);
