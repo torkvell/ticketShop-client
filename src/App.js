@@ -6,8 +6,7 @@ import SignUpContainer from "./components/user/signup/SignUpContainer";
 import Homepage from "./components/homepage/";
 import Shop from "./components/shop/";
 import Cart from "./components/cart/";
-// import AccountContainer from "./components/user/account/AccountContainer";
-
+import MyticketContainer from "./components/user/mytickets/MyticketContainer";
 import "./App.css";
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
         <Route path="/login" component={LoginContainer} />
         <Route path="/signup" component={SignUpContainer} />
         <Route path="/shop" component={Shop} />
-        {/* <Route path="/account" component={AccountContainer} /> */}
+        <Route path="/mytickets" component={MyticketContainer} />
         <Route path="/" component={Homepage} />
       </Switch>
     </div>

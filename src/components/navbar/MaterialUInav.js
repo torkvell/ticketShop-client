@@ -139,14 +139,8 @@ export default function PrimarySearchAppBar(props) {
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <ListAltIcon></ListAltIcon>
-            <Link className={classes.navLink} to="/orders">
-              Orders
-            </Link>
-          </MenuItem>
-          <MenuItem onClick={handleMenuClose}>
-            <StarIcon></StarIcon>
-            <Link className={classes.navLink} to="/wishlist">
-              Wishlist
+            <Link className={classes.navLink} to="/mytickets">
+              My tickets
             </Link>
           </MenuItem>
           <MenuItem onClick={props.logOut}>
@@ -222,14 +216,8 @@ export default function PrimarySearchAppBar(props) {
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <ListAltIcon></ListAltIcon>
-            <Link className={classes.navLink} to="/orders">
-              &nbsp;&nbsp;Orders
-            </Link>
-          </MenuItem>
-          <MenuItem onClick={handleMenuClose}>
-            <StarIcon></StarIcon>
-            <Link className={classes.navLink} to="/wishlist">
-              &nbsp;&nbsp;Wishlist
+            <Link className={classes.navLink} to="/mytickets">
+              &nbsp;&nbsp;My tickets
             </Link>
           </MenuItem>
           <MenuItem onClick={props.logOut}>
@@ -269,7 +257,7 @@ export default function PrimarySearchAppBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Webshop
+            Ticketshop
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
