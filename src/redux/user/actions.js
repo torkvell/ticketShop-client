@@ -4,11 +4,13 @@ function errorHandler(data) {
   return { type: "ERROR", payload: data };
 }
 
-export function signUp(email, password) {
+export function signUp(firstName, lastName, email, password) {
   return async function(dispatch, getState) {
     const response = await axios.post("http://localhost:4000/user/create", {
-      email: email,
-      password: password
+      firstName,
+      lastName,
+      email,
+      password
     });
     console.log(`server response: `, response);
     if (!response.data.error) {

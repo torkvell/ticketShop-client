@@ -67,6 +67,33 @@ export default function SignUp(props) {
         </Typography>
         <form onSubmit={props.handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                value={props.values.firstName}
+                onChange={props.handleChange}
+                label="First Name"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                value={props.values.lastName}
+                onChange={props.handleChange}
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
