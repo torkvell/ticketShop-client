@@ -5,7 +5,8 @@ const initialState = {
   token: null,
   error: null,
   accountCreated: false,
-  tickets: null
+  tickets: null,
+  events: null
 };
 
 export default (state = initialState, action = {}) => {
@@ -30,19 +31,34 @@ export default (state = initialState, action = {}) => {
         ...state,
         tickets: action.payload
       };
+    case "GET_ALL_USER_EVENTS":
+      return {
+        ...state,
+        events: action.payload
+      };
     case "TICKET_CREATED":
       return {
         ...state,
         tickets: [...state.tickets, action.payload]
+      };
+    case "EVENT_CREATED":
+      return {
+        ...state,
+        events: [...state.events, action.payload]
       };
     case "TICKET_DELETED":
       const ticketIdDeleted = action.payload;
       const updatedTickets = state.tickets.filter(
         ticket => ticket.id !== ticketIdDeleted
       );
+    case "EVENT_DELETED":
+      const eventIdDeleted = action.payload;
+      const updatedEvents = state.events.filter(
+        event => event.id !== eventIdDeleted
+      );
       return {
         ...state,
-        tickets: updatedTickets
+        events: updatedEvents
       };
     default:
       return state;

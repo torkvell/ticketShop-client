@@ -6,7 +6,8 @@ import SignUpContainer from "./components/user/signup/SignUpContainer";
 import Homepage from "./components/homepage/";
 import Shop from "./components/shop/";
 import Cart from "./components/cart/";
-import MyticketContainer from "./components/user/mytickets/MyticketContainer";
+import MyTicketContainer from "./components/user/mytickets/MyTicketContainer";
+import MyEventContainer from "./components/user/myEvents/MyEventContainer";
 import "./App.css";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Route path="/login" component={LoginContainer} />
         <Route path="/signup" component={SignUpContainer} />
         <Route path="/shop" component={Shop} />
-        <Route path="/mytickets" component={MyticketContainer} />
+        <Route path="/mytickets" component={MyTicketContainer} />
+        <Route path="/myevents" component={MyEventContainer} />
         <Route path="/" component={Homepage} />
       </Switch>
     </div>

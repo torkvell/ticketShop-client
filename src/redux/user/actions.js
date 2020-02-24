@@ -1,8 +1,6 @@
 import axios from "axios";
 
-function errorHandler(data) {
-  return { type: "ERROR", payload: data };
-}
+/*--------------------SIGN UP--------------------*/
 
 export function signUp(firstName, lastName, email, password) {
   return async function(dispatch, getState) {
@@ -24,6 +22,8 @@ export function signUp(firstName, lastName, email, password) {
 function signUpSuccess(data) {
   return { type: "USER_CREATED", payload: data };
 }
+
+/*--------------------LOGIN--------------------*/
 
 export function logIn(email, password) {
   return async function(dispatch, getState) {
@@ -47,6 +47,8 @@ function loginSuccess(data) {
   };
 }
 
+/*--------------------LOGOUT--------------------*/
+
 export function logOut() {
   return async function(dispatch) {
     dispatch(logOutSuccess());
@@ -56,6 +58,8 @@ export function logOut() {
 function logOutSuccess() {
   return { type: "USER_LOGOUT" };
 }
+
+/*--------------------MY TICKETS--------------------*/
 
 export function getMyTickets(userId) {
   return async function(dispatch, getState) {
@@ -123,4 +127,93 @@ export function deleteTicket(id, token) {
 
 function ticketDeleted(data) {
   return { type: "TICKET_DELETED", payload: data };
+}
+
+/*--------------------MY EVENTS--------------------*/
+
+export function getMyEvents(userId) {
+  return async function(dispatch, getState) {
+    const response = await axios.get(
+      `http://localhost:4000/event/all/${userId}`
+    );
+    console.log(`server response get user events: `, response);
+    if (!response.data.error) {
+      dispatch(updateUserEvents(response.data));
+    } else {
+      dispatch(errorHandler(response.data));
+    }
+  };
+}
+
+function updateUserEvents(data) {
+  return { type: "GET_ALL_USER_EVENTS", payload: data };
+}
+
+export function createEvent(
+  name,
+  imageUrl,
+  startDate,
+  endDate,
+  description,
+  userId,
+  token
+) {
+  // console.log(
+  //   `inside thunk for create event`,
+  //   name,
+  //   imageUrl,
+  //   startDate,
+  //   endDate,
+  //   description,
+  //   userId,
+  //   token
+  // );
+
+  return async function(dispatch, getState) {
+    const response = await axios.post("http://localhost:4000/event/create", {
+      name,
+      imageUrl,
+      startDate,
+      endDate,
+      description,
+      userId,
+      token
+    });
+    console.log(`server response create event: `, response);
+    if (!response.data.error) {
+      dispatch(eventCreated(response.data));
+    } else {
+      dispatch(errorHandler(response.data));
+    }
+  };
+}
+
+function eventCreated(data) {
+  return { type: "EVENT_CREATED", payload: data };
+}
+
+export function deleteEvent(id, token) {
+  console.log(`inside thunk for delete event`, id, token);
+  return async function(dispatch, getState) {
+    const response = await axios.post("http://localhost:4000/event/delete", {
+      id,
+      token
+    });
+    console.log(`server response delete event: `, response);
+    if (!response.data.error) {
+      dispatch(eventDeleted(response.data));
+    } else {
+      dispatch(errorHandler(response.data));
+    }
+  };
+}
+
+function eventDeleted(data) {
+  return { type: "EVENT_DELETED", payload: data };
+}
+
+/*--------------------ERROR HANDLING--------------------*/
+
+function errorHandler(data) {
+  return { type: "ERROR", payload: data };
 }
