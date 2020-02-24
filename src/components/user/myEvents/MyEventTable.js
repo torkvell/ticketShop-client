@@ -7,28 +7,23 @@ export default function EventTable(props) {
   const [state, setState] = React.useState({
     columns: [
       { title: "ID", field: "id" },
+      { title: "Name", field: "name" },
       { title: "Description", field: "description" },
-      { title: "Price", field: "price", type: "numeric" },
+      { title: "Start date", field: "startDate" },
+      { title: "End date", field: "endDate" },
       { title: "Image URL", field: "imageURL" }
     ],
     data: props.user.events.map(event => {
       return {
         id: event.id,
+        name: event.name,
         description: event.description,
-        price: event.price,
+        startDate: event.startDate,
+        endDate: event.endDate,
         imageURL: event.imageUrl
       };
     })
   });
-  let data = props.user.events.map(event => {
-    return {
-      id: event.id,
-      description: event.description,
-      price: event.price,
-      imageURL: event.imageUrl
-    };
-  });
-  console.log(data);
 
   return (
     <Container>
@@ -48,9 +43,11 @@ export default function EventTable(props) {
                 });
               }, 600);
               props.createEvent(
-                newData.description,
-                newData.price,
+                newData.name,
                 newData.imageURL,
+                newData.startDate,
+                newData.endDate,
+                newData.description,
                 props.user.id,
                 props.user.token
               );

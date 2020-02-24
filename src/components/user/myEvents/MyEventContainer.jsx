@@ -21,9 +21,8 @@ class MyEventContainer extends Component {
         <div>
           <EventTable
             user={this.props.user}
-            deleteTicket={this.props.deleteEvent}
-            createTicket={this.props.createEvent}
-            getMyTickets={this.props.getMyEvents}
+            deleteEvent={this.props.deleteEvent}
+            createEvent={this.props.createEvent}
           />
         </div>
       );

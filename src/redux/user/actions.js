@@ -149,22 +149,35 @@ function updateUserEvents(data) {
   return { type: "GET_ALL_USER_EVENTS", payload: data };
 }
 
-export function createEvent(description, price, imageURL, userId, token) {
-  console.log(
-    `inside thunk for create event`,
-    description,
-    price,
-    imageURL,
-    token,
-    userId
-  );
+export function createEvent(
+  name,
+  imageUrl,
+  startDate,
+  endDate,
+  description,
+  userId,
+  token
+) {
+  // console.log(
+  //   `inside thunk for create event`,
+  //   name,
+  //   imageUrl,
+  //   startDate,
+  //   endDate,
+  //   description,
+  //   userId,
+  //   token
+  // );
+
   return async function(dispatch, getState) {
     const response = await axios.post("http://localhost:4000/event/create", {
-      description: description,
-      price: price,
-      imageURL: imageURL,
-      token,
-      userId
+      name,
+      imageUrl,
+      startDate,
+      endDate,
+      description,
+      userId,
+      token
     });
     console.log(`server response create event: `, response);
     if (!response.data.error) {

@@ -25,7 +25,6 @@ class MyTicketContainer extends Component {
             user={this.props.user}
             deleteTicket={this.props.deleteTicket}
             createTicket={this.props.createTicket}
-            getMyTickets={this.props.getMyTickets}
           />
         </div>
       );
