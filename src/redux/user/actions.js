@@ -70,7 +70,7 @@ export function getMyTickets(userId) {
 }
 
 function updateUserTickets(data) {
-  return { type: "GET_USER_TICKETS", payload: data };
+  return { type: "GET_ALL_USER_TICKETS", payload: data };
 }
 
 export function createTicket(description, price, imageURL, userId, token) {
@@ -103,25 +103,22 @@ function ticketCreated(data) {
   return { type: "TICKET_CREATED", payload: data };
 }
 
-export function deleteTicket(description, price, imageURL, token) {
+export function deleteTicket(id, token) {
+  console.log(`inside thunk for delete ticket`, id, token);
   return async function(dispatch, getState) {
-    // const response = await axios.post("http://localhost:4000/ticket/create", {
-    //   descriptopn: description,
-    //   price: price,
-    //   imageURL: imageURL
-    // });
-    // console.log(`server response create ticket: `, response);
-    // if (!response.data.error) {
-    //   dispatch(ticketCreated(response.data));
-    // } else {
-    //   dispatch(errorHandler(response.data));
-    // }
-    console.log(
-      `inside thunk for delete ticket`,
-      description,
-      price,
-      imageURL,
+    const response = await axios.post("http://localhost:4000/ticket/delete", {
+      id,
       token
-    );
+    });
+    console.log(`server response delete ticket: `, response);
+    if (!response.data.error) {
+      dispatch(ticketDeleted(response.data));
+    } else {
+      dispatch(errorHandler(response.data));
+    }
   };
+}
+
+function ticketDeleted(data) {
+  return { type: "TICKET_DELETED", payload: data };
 }
