@@ -1,0 +1,182 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "categoryId": 4,
+      "name": "Product 1",
+      "imageUrl": "https://picsum.photos/400?image=696",
+      "inStock": true,
+      "price": "3432"
+    },
+    {
+      "id": 2,
+      "categoryId": 1,
+      "name": "Product 2",
+      "imageUrl": "https://picsum.photos/400?image=230",
+      "inStock": false,
+      "price": "2374"
+    },
+    {
+      "id": 3,
+      "categoryId": 4,
+      "name": "Product 3",
+      "imageUrl": "https://picsum.photos/400?image=277",
+      "inStock": false,
+      "price": "1942"
+    },
+    {
+      "id": 4,
+      "categoryId": 3,
+      "name": "Product 4",
+      "imageUrl": "https://picsum.photos/400?image=963",
+      "inStock": true,
+      "price": "2367"
+    },
+    {
+      "id": 5,
+      "categoryId": 3,
+      "name": "Product 5",
+      "imageUrl": "https://picsum.photos/400?image=637",
+      "inStock": false,
+      "price": "1991"
+    },
+    {
+      "id": 6,
+      "categoryId": 3,
+      "name": "Product 6",
+      "imageUrl": "https://picsum.photos/400?image=811",
+      "inStock": true,
+      "price": "1956"
+    },
+    {
+      "id": 7,
+      "categoryId": 2,
+      "name": "Product 7",
+      "imageUrl": "https://picsum.photos/400?image=616",
+      "inStock": false,
+      "price": "2005"
+    },
+    {
+      "id": 8,
+      "categoryId": 4,
+      "name": "Product 8",
+      "imageUrl": "https://picsum.photos/400?image=522",
+      "inStock": false,
+      "price": "1358"
+    },
+    {
+      "id": 9,
+      "categoryId": 3,
+      "name": "Product 9",
+      "imageUrl": "https://picsum.photos/400?image=615",
+      "inStock": false,
+      "price": "2345"
+    },
+    {
+      "id": 10,
+      "categoryId": 1,
+      "name": "Product 10",
+      "imageUrl": "https://picsum.photos/400?image=601",
+      "inStock": false,
+      "price": "1823"
+    },
+    {
+      "id": 11,
+      "categoryId": 1,
+      "name": "Product 11",
+      "imageUrl": "https://picsum.photos/400?image=314",
+      "inStock": true,
+      "price": "1752"
+    },
+    {
+      "id": 12,
+      "categoryId": 4,
+      "name": "Product 12",
+      "imageUrl": "https://picsum.photos/400?image=442",
+      "inStock": true,
+      "price": "2196"
+    },
+    {
+      "id": 13,
+      "categoryId": 4,
+      "name": "Product 13",
+      "imageUrl": "https://picsum.photos/400?image=338",
+      "inStock": true,
+      "price": "3276"
+    },
+    {
+      "id": 14,
+      "categoryId": 4,
+      "name": "Product 14",
+      "imageUrl": "https://picsum.photos/400?image=739",
+      "inStock": false,
+      "price": "1454"
+    },
+    {
+      "id": 15,
+      "categoryId": 4,
+      "name": "Product 15",
+      "imageUrl": "https://picsum.photos/400?image=901",
+      "inStock": false,
+      "price": "1368"
+    },
+    {
+      "id": 16,
+      "categoryId": 3,
+      "name": "Product 16",
+      "imageUrl": "https://picsum.photos/400?image=372",
+      "inStock": false,
+      "price": "2087"
+    },
+    {
+      "id": 17,
+      "categoryId": 1,
+      "name": "Product 17",
+      "imageUrl": "https://picsum.photos/400?image=264",
+      "inStock": true,
+      "price": "2523"
+    },
+    {
+      "id": 18,
+      "categoryId": 1,
+      "name": "Product 18",
+      "imageUrl": "https://picsum.photos/400?image=133",
+      "inStock": true,
+      "price": "1118"
+    },
+    {
+      "id": 19,
+      "categoryId": 2,
+      "name": "Product 19",
+      "imageUrl": "https://picsum.photos/400?image=359",
+      "inStock": false,
+      "price": "1966"
+    },
+    {
+      "id": 20,
+      "categoryId": 1,
+      "name": "Product 20",
+      "imageUrl": "https://picsum.photos/400?image=354",
+      "inStock": false,
+      "price": "2569"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Category 1"
+    },
+    {
+      "id": 2,
+      "name": "Category 2"
+    },
+    {
+      "id": 3,
+      "name": "Category 3"
+    },
+    {
+      "id": 4,
+      "name": "Category 4"
+    }
+  ]
+}
