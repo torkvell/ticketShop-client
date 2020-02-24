@@ -80,22 +80,17 @@ function updateUserTickets(data) {
 }
 
 export function createTicket(description, price, imageURL, userId, token) {
-  console.log(
-    `inside thunk for create ticket`,
-    description,
-    price,
-    imageURL,
-    token,
-    userId
-  );
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/ticket/create", {
-      description: description,
-      price: price,
-      imageURL: imageURL,
-      token,
-      userId
-    });
+    const response = await axios.post(
+      "http://localhost:4000/ticket/create",
+      {
+        description: description,
+        price: price,
+        imageURL: imageURL,
+        userId
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     console.log(`server response create ticket: `, response);
     if (!response.data.error) {
       dispatch(ticketCreated(response.data));
@@ -112,10 +107,13 @@ function ticketCreated(data) {
 export function deleteTicket(id, token) {
   console.log(`inside thunk for delete ticket`, id, token);
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/ticket/delete", {
-      id,
-      token
-    });
+    const response = await axios.post(
+      "http://localhost:4000/ticket/delete",
+      {
+        id
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     console.log(`server response delete ticket: `, response);
     if (!response.data.error) {
       dispatch(ticketDeleted(response.data));
@@ -158,27 +156,19 @@ export function createEvent(
   userId,
   token
 ) {
-  // console.log(
-  //   `inside thunk for create event`,
-  //   name,
-  //   imageUrl,
-  //   startDate,
-  //   endDate,
-  //   description,
-  //   userId,
-  //   token
-  // );
-
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/event/create", {
-      name,
-      imageUrl,
-      startDate,
-      endDate,
-      description,
-      userId,
-      token
-    });
+    const response = await axios.post(
+      "http://localhost:4000/event/create",
+      {
+        name,
+        imageUrl,
+        startDate,
+        endDate,
+        description,
+        userId
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     console.log(`server response create event: `, response);
     if (!response.data.error) {
       dispatch(eventCreated(response.data));
@@ -195,10 +185,13 @@ function eventCreated(data) {
 export function deleteEvent(id, token) {
   console.log(`inside thunk for delete event`, id, token);
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/event/delete", {
-      id,
-      token
-    });
+    const response = await axios.post(
+      "http://localhost:4000/event/delete",
+      {
+        id
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     console.log(`server response delete event: `, response);
     if (!response.data.error) {
       dispatch(eventDeleted(response.data));
