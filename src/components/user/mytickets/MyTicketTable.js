@@ -77,6 +77,8 @@ export default function TicketTable(props) {
                   data.splice(data.indexOf(oldData), 1);
                   return { ...prevState, data };
                 });
+                console.log(oldData);
+                props.deleteTicket(oldData.id, props.user.token);
               }, 600);
             })
         }}

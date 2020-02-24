@@ -25,7 +25,7 @@ export default (state = initialState, action = {}) => {
         email: action.payload.email,
         token: action.payload.token
       };
-    case "GET_USER_TICKETS":
+    case "GET_ALL_USER_TICKETS":
       return {
         ...state,
         tickets: action.payload
@@ -34,6 +34,15 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         tickets: [...state.tickets, action.payload]
+      };
+    case "TICKET_DELETED":
+      const ticketIdDeleted = action.payload;
+      const updatedTickets = state.tickets.filter(
+        ticket => ticket.id !== ticketIdDeleted
+      );
+      return {
+        ...state,
+        tickets: updatedTickets
       };
     default:
       return state;
