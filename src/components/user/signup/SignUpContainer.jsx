@@ -7,15 +7,24 @@ import { Link } from "react-router-dom";
 
 class SignUpContainer extends Component {
   state = {
+    firstName: "",
+    lastName: "",
     email: "",
     password: ""
   };
   handleSubmit = event => {
     event.preventDefault();
-    this.props.signUp(this.state.email, this.state.password);
+    this.props.signUp(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.email,
+      this.state.password
+    );
     this.setState({
       email: "",
-      password: ""
+      password: "",
+      firstName: "",
+      lastName: ""
     });
   };
   handleChange = event => {
