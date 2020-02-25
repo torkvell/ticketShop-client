@@ -3,7 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import NavigationBar from "./components/navbar/NavBarContainer";
 import LoginContainer from "./components/user/login/LoginContainer";
 import SignUpContainer from "./components/user/signup/SignUpContainer";
-import Homepage from "./components/homepage/";
+import EventContainer from "./components/events/EventContainer.jsx";
+import Ticket from "./components/tickets/";
 import Shop from "./components/shop/";
 import Cart from "./components/cart/";
 import MyTicketContainer from "./components/user/myTickets/MyticketContainer";
@@ -27,7 +28,8 @@ class App extends Component {
           <Route path="/shop" component={Shop} />
           <Route path="/mytickets" component={MyTicketContainer} />
           <Route path="/myevents" component={MyEventContainer} />
-          <Route path="/" component={Homepage} />
+          <Route path="/ticket" component={Ticket} />
+          <Route path="/" exact component={EventContainer} />
         </Switch>
       </div>
     );
