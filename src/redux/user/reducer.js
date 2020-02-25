@@ -1,10 +1,8 @@
 const initialState = {
-  userLoggedIn: false,
   id: false,
   email: false,
   token: null,
   error: null,
-  accountCreated: false,
   tickets: null,
   events: null
 };
@@ -55,6 +53,22 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         tickets: updatedTickets
+      };
+    case "TICKET_UPDATED":
+      console.log("ticket_updated reducer");
+      const ticketIdUpdated = action.payload.id;
+      console.log("ticket id updated", ticketIdUpdated);
+      const newTicketArray = state.tickets.map(ticket => {
+        if (ticket.id == ticketIdUpdated) {
+          return action.payload;
+        } else {
+          return ticket;
+        }
+      });
+      console.log("new ticket array", newTicketArray);
+      return {
+        ...state,
+        tickets: newTicketArray
       };
     case "EVENT_DELETED":
       console.log("event deleted reducer");

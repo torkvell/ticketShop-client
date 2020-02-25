@@ -127,6 +127,30 @@ function ticketDeleted(data) {
   return { type: "TICKET_DELETED", payload: data };
 }
 
+export function updateTicket(id, description, price, imageUrl, token) {
+  return async function(dispatch, getState) {
+    const response = await axios.put(
+      `http://localhost:4000/ticket/update/${id}`,
+      {
+        description,
+        price,
+        imageUrl
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log(`server response update ticket: `, response);
+    if (!response.data.error) {
+      dispatch(ticketUpdated(response.data));
+    } else {
+      dispatch(errorHandler(response.data));
+    }
+  };
+}
+
+function ticketUpdated(data) {
+  return { type: "TICKET_UPDATED", payload: data };
+}
+
 /*--------------------MY EVENTS--------------------*/
 
 export function getMyEvents(userId) {

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import TicketForm from "./MyTicketTable";
 import {
+  updateTicket,
   createTicket,
   deleteTicket,
   getMyTickets
 } from "../../../redux/user/actions";
 import { connect } from "react-redux";
+import { Container } from "@material-ui/core";
 
 class MyTicketContainer extends Component {
   state = {};
@@ -21,11 +23,14 @@ class MyTicketContainer extends Component {
     } else {
       return (
         <div>
-          <TicketForm
-            user={this.props.user}
-            deleteTicket={this.props.deleteTicket}
-            createTicket={this.props.createTicket}
-          />
+          <Container>
+            <TicketForm
+              user={this.props.user}
+              deleteTicket={this.props.deleteTicket}
+              createTicket={this.props.createTicket}
+              updateTicket={this.props.updateTicket}
+            />
+          </Container>
         </div>
       );
     }
@@ -41,5 +46,6 @@ function mapStateToProps(reduxState) {
 export default connect(mapStateToProps, {
   createTicket,
   deleteTicket,
-  getMyTickets
+  getMyTickets,
+  updateTicket
 })(MyTicketContainer);
