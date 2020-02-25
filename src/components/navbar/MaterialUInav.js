@@ -23,6 +23,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import StarIcon from "@material-ui/icons/Star";
 import EventIcon from "@material-ui/icons/Event";
+import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles(theme => ({
   navWrapper: {
@@ -89,6 +90,10 @@ const useStyles = makeStyles(theme => ({
   },
   navLink: {
     color: "black !important",
+    textDecoration: "none !important"
+  },
+  navLinkWhite: {
+    color: "white !important",
     textDecoration: "none !important"
   }
 }));
@@ -261,14 +266,16 @@ export default function PrimarySearchAppBar(props) {
     <div className={(classes.grow, classes.navWrapper)}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+          <Link to="/" className={classes.navLinkWhite}>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+            >
+              <HomeIcon />
+            </IconButton>
+          </Link>
           <Typography className={classes.title} variant="h6" noWrap>
             TicketShop
           </Typography>
