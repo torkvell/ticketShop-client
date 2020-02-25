@@ -6,23 +6,25 @@ export default function EventTable(props) {
   console.log("MyEventTable props:", props);
   const [state, setState] = React.useState({
     columns: [
-      { title: "ID", field: "id" },
+      { title: "ID", field: "id", editable: "never" },
       { title: "Name", field: "name" },
       { title: "Description", field: "description" },
       { title: "Start date", field: "startDate" },
       { title: "End date", field: "endDate" },
       { title: "Image URL", field: "imageURL" }
     ],
-    data: props.user.events.map(event => {
-      return {
-        id: event.id,
-        name: event.name,
-        description: event.description,
-        startDate: event.startDate,
-        endDate: event.endDate,
-        imageURL: event.imageUrl
-      };
-    })
+    data: props.user.events
+      ? props.user.events.map(event => {
+          return {
+            id: event.id,
+            name: event.name,
+            description: event.description,
+            startDate: event.startDate,
+            endDate: event.endDate,
+            imageURL: event.imageUrl
+          };
+        })
+      : []
   });
 
   return (

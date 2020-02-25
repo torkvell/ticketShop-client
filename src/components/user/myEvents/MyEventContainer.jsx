@@ -14,19 +14,15 @@ class MyEventContainer extends Component {
 
   render() {
     // console.log(`props for ticket table: `, this.props);
-    if (!this.props.user.events) {
-      return <div>Loading data...</div>;
-    } else {
-      return (
-        <div>
-          <EventTable
-            user={this.props.user}
-            deleteEvent={this.props.deleteEvent}
-            createEvent={this.props.createEvent}
-          />
-        </div>
-      );
-    }
+    return (
+      <div>
+        <EventTable
+          user={this.props.user}
+          deleteEvent={this.props.deleteEvent}
+          createEvent={this.props.createEvent}
+        />
+      </div>
+    );
   }
 }
 

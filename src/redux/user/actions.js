@@ -79,15 +79,23 @@ function updateUserTickets(data) {
   return { type: "GET_ALL_USER_TICKETS", payload: data };
 }
 
-export function createTicket(description, price, imageURL, userId, token) {
+export function createTicket(
+  description,
+  price,
+  imageURL,
+  userId,
+  eventId,
+  token
+) {
   return async function(dispatch, getState) {
     const response = await axios.post(
       "http://localhost:4000/ticket/create",
       {
-        description: description,
-        price: price,
-        imageURL: imageURL,
-        userId
+        description,
+        price,
+        imageURL,
+        userId,
+        eventId
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
