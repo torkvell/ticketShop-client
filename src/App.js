@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavigationBar from "./components/navbar/NavBarContainer";
 import LoginContainer from "./components/user/login/LoginContainer";
@@ -9,22 +9,31 @@ import Cart from "./components/cart/";
 import MyTicketContainer from "./components/user/myTickets/MyticketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
 import "./App.css";
+import { getAllEvents } from "./redux/events/actions";
+import { connect } from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <NavigationBar />
-      <Switch>
-        <Route path="/cart" component={Cart} />
-        <Route path="/login" component={LoginContainer} />
-        <Route path="/signup" component={SignUpContainer} />
-        <Route path="/shop" component={Shop} />
-        <Route path="/mytickets" component={MyTicketContainer} />
-        <Route path="/myevents" component={MyEventContainer} />
-        <Route path="/" component={Homepage} />
-      </Switch>
-    </div>
-  );
+class App extends Component {
+  componentDidMount = () => {
+    this.props.getAllEvents();
+  };
+  render() {
+    return (
+      <div className="App">
+        <NavigationBar />
+        <Switch>
+          <Route path="/cart" component={Cart} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/signup" component={SignUpContainer} />
+          <Route path="/shop" component={Shop} />
+          <Route path="/mytickets" component={MyTicketContainer} />
+          <Route path="/myevents" component={MyEventContainer} />
+          <Route path="/" component={Homepage} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default connect(null, {
+  getAllEvents
+})(App);

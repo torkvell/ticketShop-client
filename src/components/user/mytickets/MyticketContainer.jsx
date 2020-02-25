@@ -18,28 +18,26 @@ class MyTicketContainer extends Component {
 
   render() {
     // console.log(`props for ticket table: `, this.props);
-    if (!this.props.user.tickets) {
-      return <div>Loading data...</div>;
-    } else {
-      return (
-        <div>
-          <Container>
-            <TicketForm
-              user={this.props.user}
-              deleteTicket={this.props.deleteTicket}
-              createTicket={this.props.createTicket}
-              updateTicket={this.props.updateTicket}
-            />
-          </Container>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <Container>
+          <TicketForm
+            user={this.props.user}
+            deleteTicket={this.props.deleteTicket}
+            createTicket={this.props.createTicket}
+            updateTicket={this.props.updateTicket}
+            events={this.props.events}
+          />
+        </Container>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(reduxState) {
   return {
-    user: reduxState.user
+    user: reduxState.user,
+    events: reduxState.events
   };
 }
 
