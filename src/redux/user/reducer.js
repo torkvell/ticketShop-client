@@ -1,10 +1,8 @@
 const initialState = {
-  userLoggedIn: false,
   id: false,
   email: false,
   token: null,
   error: null,
-  accountCreated: false,
   tickets: null,
   events: null
 };

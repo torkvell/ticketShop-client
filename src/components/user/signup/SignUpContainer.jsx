@@ -38,11 +38,11 @@ class SignUpContainer extends Component {
       //TODO: Redirect to user's home page to confirm login
       setTimeout(() => {
         this.props.history.push("/login");
-      }, 2000);
+      }, 2500);
       return (
         <h3>
           You are signed up! Redirecting you to
-          <Link to="/login">login page</Link>
+          <Link to="/login"> login page</Link>
         </h3>
       );
     }
