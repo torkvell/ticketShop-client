@@ -27,7 +27,7 @@ class LoginContainer extends Component {
 
   render() {
     if (this.props.user.userLoggedIn) {
-      return <Redirect to="/account" />;
+      return <Redirect to="/" />;
     }
     return (
       <div>
