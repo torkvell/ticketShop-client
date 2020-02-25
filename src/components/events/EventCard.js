@@ -11,12 +11,11 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-    marginBottom: "5%"
-  },
   media: {
     height: 200
+  },
+  cardAction: {
+    justifyContent: "center"
   }
 });
 
@@ -25,8 +24,8 @@ export default function MediaCard(props) {
 
   return props.events.map(event => {
     return (
-      <Grid item xs={12} sm={12}>
-        <Card className={classes.root}>
+      <Grid item xs={12} sm={6} md={4} xl={3}>
+        <Card>
           <CardActionArea>
             <CardMedia
               className={classes.media}
@@ -42,7 +41,7 @@ export default function MediaCard(props) {
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
+          <CardActions className={classes.cardAction}>
             <Link to={"/ticket/" + event.id}>
               <Button size="small" color="primary">
                 See all tickets

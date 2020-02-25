@@ -4,6 +4,7 @@ import EventCard from "./EventCard.js";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Paginator from "./Paginator";
+import { makeStyles } from "@material-ui/core/styles";
 
 class EventContainer extends Component {
   state = {
@@ -17,6 +18,14 @@ class EventContainer extends Component {
   };
 
   render() {
+    const paginatorStyle = {
+      marginTop: "30x",
+      marginBottom: "30px"
+    };
+    const gridWrapperStyle = {
+      marginBottom: "30px"
+    };
+
     const eventsPerPage = 9;
     const indexOfLastEvent = this.state.currentPage * eventsPerPage;
     const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
@@ -27,14 +36,23 @@ class EventContainer extends Component {
       : [];
     return (
       <Container>
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid
+          style={gridWrapperStyle}
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={3}
+        >
           <EventCard events={currentEvents}></EventCard>
         </Grid>
-        <Paginator
-          eventsPerPage={eventsPerPage}
-          totalEvents={this.props.events ? this.props.events.length : 0}
-          paginate={this.paginate}
-        ></Paginator>
+        <Grid container spacing={3} justify="center" style={paginatorStyle}>
+          <Paginator
+            eventsPerPage={eventsPerPage}
+            totalEvents={this.props.events ? this.props.events.length : 0}
+            paginate={this.paginate}
+          ></Paginator>
+        </Grid>
       </Container>
     );
   }
