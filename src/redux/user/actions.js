@@ -135,14 +135,15 @@ function ticketDeleted(data) {
   return { type: "TICKET_DELETED", payload: data };
 }
 
-export function updateTicket(id, description, price, imageUrl, token) {
+export function updateTicket(id, description, price, imageUrl, eventId, token) {
   return async function(dispatch, getState) {
     const response = await axios.put(
       `http://localhost:4000/ticket/update/${id}`,
       {
         description,
         price,
-        imageUrl
+        imageUrl,
+        eventId
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );

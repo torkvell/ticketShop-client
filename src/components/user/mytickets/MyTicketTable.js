@@ -98,6 +98,7 @@ export default class TicketTable extends React.Component {
                   newData.description,
                   newData.price,
                   newData.imageUrl,
+                  this.state.eventId,
                   this.props.user.token
                 );
               }),
