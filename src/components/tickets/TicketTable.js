@@ -181,7 +181,7 @@ export default function EnhancedTable(props) {
   }
   const rows = props.ticketArray.map(ticket => {
     return createData(
-      ticket.id,
+      ticket.title,
       ticket.description,
       ticket.price,
       ticket.fraudRating
