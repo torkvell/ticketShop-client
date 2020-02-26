@@ -80,6 +80,7 @@ function updateUserTickets(data) {
 }
 
 export function createTicket(
+  title,
   description,
   price,
   imageURL,
@@ -91,6 +92,7 @@ export function createTicket(
     const response = await axios.post(
       "http://localhost:4000/ticket/create",
       {
+        title,
         description,
         price,
         imageURL,

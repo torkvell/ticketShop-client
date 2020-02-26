@@ -10,6 +10,7 @@ export default class TicketTable extends React.Component {
   state = {
     columns: [
       { title: "ID", field: "id", editable: "never" },
+      { title: "Title", field: "title" },
       { title: "Description", field: "description" },
       {
         title: "Event",
@@ -29,7 +30,7 @@ export default class TicketTable extends React.Component {
     ],
     data: this.props.user.tickets
       ? this.props.user.tickets.map(ticket => {
-          let eventForCurrentTicket = this.props.events.filter(
+          const eventForCurrentTicket = this.props.events.filter(
             event => ticket.eventId == event.id
           )[0];
 
@@ -38,12 +39,13 @@ export default class TicketTable extends React.Component {
             eventForCurrentTicket
           );
 
-          let eventName = eventForCurrentTicket
+          const eventName = eventForCurrentTicket
             ? eventForCurrentTicket.name
             : "something went wrong";
           console.log("event name", eventName);
           return {
             id: ticket.id,
+            title: ticket.title,
             description: ticket.description,
             event: eventName,
             price: ticket.price,
@@ -73,6 +75,7 @@ export default class TicketTable extends React.Component {
                 }, 600);
                 console.log("newData", newData);
                 this.props.createTicket(
+                  newData.title,
                   newData.description,
                   newData.price,
                   newData.imageUrl,
