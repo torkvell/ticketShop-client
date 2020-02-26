@@ -2,10 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TicketTable from "../tickets/TicketTable";
 import { Container } from "@material-ui/core";
+import { getFraudCalculationEventTickets } from "../../redux/events/actions";
 
 const qs = require("qs");
 
 class TicketContainer extends Component {
+  componentDidMount = () => {
+    const eventId = parseInt(
+      qs.parse(this.props.location.search, {
+        ignoreQueryPrefix: true
+      }).eventId
+    );
+    this.props.getFraudCalculationEventTickets(eventId);
+  };
   render() {
     const eventId = parseInt(
       qs.parse(this.props.location.search, {
@@ -33,4 +42,6 @@ const mapStateToProps = reduxState => {
   };
 };
 
-export default connect(mapStateToProps)(TicketContainer);
+export default connect(mapStateToProps, { getFraudCalculationEventTickets })(
+  TicketContainer
+);
