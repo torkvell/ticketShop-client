@@ -10,7 +10,7 @@ export function signUp(firstName, lastName, email, password) {
       email,
       password
     });
-    console.log(`server response: `, response);
+    console.log(`server response sign up: `, response);
     if (!response.data.error) {
       dispatch(signUpSuccess(response.data));
     } else {
@@ -31,7 +31,7 @@ export function logIn(email, password) {
       email,
       password
     });
-    console.log(`server response: `, response);
+    console.log(`server response login: `, response);
     if (!response.data.error) {
       dispatch(loginSuccess(response.data));
     } else {
@@ -62,9 +62,10 @@ function logOutSuccess() {
 /*--------------------MY TICKETS--------------------*/
 
 export function getMyTickets(userId) {
+  console.log(`thunk get my tickets. userId: ${userId}`);
   return async function(dispatch, getState) {
     const response = await axios.get(
-      `http://localhost:4000/ticket/all/${userId}`
+      `http://localhost:4000/ticket/user/${userId}`
     );
     console.log(`server response get user tickets: `, response);
     if (!response.data.error) {
@@ -115,7 +116,6 @@ function ticketCreated(data) {
 }
 
 export function deleteTicket(id, token) {
-  console.log(`inside thunk for delete ticket`, id, token);
   return async function(dispatch, getState) {
     const response = await axios.post(
       "http://localhost:4000/ticket/delete",
@@ -137,11 +137,20 @@ function ticketDeleted(data) {
   return { type: "TICKET_DELETED", payload: data };
 }
 
-export function updateTicket(id, description, price, imageUrl, eventId, token) {
+export function updateTicket(
+  id,
+  title,
+  description,
+  price,
+  imageUrl,
+  eventId,
+  token
+) {
   return async function(dispatch, getState) {
     const response = await axios.put(
       `http://localhost:4000/ticket/update/${id}`,
       {
+        title,
         description,
         price,
         imageUrl,
@@ -218,7 +227,6 @@ function eventCreated(data) {
 }
 
 export function deleteEvent(id, token) {
-  console.log(`inside thunk for delete event`, id, token);
   return async function(dispatch, getState) {
     const response = await axios.post(
       "http://localhost:4000/event/delete",

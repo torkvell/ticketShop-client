@@ -33,16 +33,9 @@ export default class TicketTable extends React.Component {
           const eventForCurrentTicket = this.props.events.filter(
             event => ticket.eventId == event.id
           )[0];
-
-          console.log(
-            `event for current ticketid: ${ticket.id}`,
-            eventForCurrentTicket
-          );
-
           const eventName = eventForCurrentTicket
             ? eventForCurrentTicket.name
             : "something went wrong";
-          console.log("event name", eventName);
           return {
             id: ticket.id,
             title: ticket.title,
@@ -56,12 +49,33 @@ export default class TicketTable extends React.Component {
   };
 
   render() {
+    const msg = this.props.user.tickets ? true : false;
+    console.log(`my ticket table rendered. state: ${this.state} msg:${msg}`);
     return (
       <Container>
         <MaterialTable
           title="My Tickets"
           columns={this.state.columns}
-          data={this.state.data}
+          data={
+            this.props.user.tickets
+              ? this.props.user.tickets.map(ticket => {
+                  const eventForCurrentTicket = this.props.events.filter(
+                    event => ticket.eventId == event.id
+                  )[0];
+                  const eventName = eventForCurrentTicket
+                    ? eventForCurrentTicket.name
+                    : "something went wrong";
+                  return {
+                    id: ticket.id,
+                    title: ticket.title,
+                    description: ticket.description,
+                    event: eventName,
+                    price: ticket.price,
+                    imageUrl: ticket.imageUrl
+                  };
+                })
+              : []
+          }
           editable={{
             onRowAdd: newData =>
               new Promise(resolve => {
@@ -73,7 +87,6 @@ export default class TicketTable extends React.Component {
                     return { ...prevState, data };
                   });
                 }, 600);
-                console.log("newData", newData);
                 this.props.createTicket(
                   newData.title,
                   newData.description,
@@ -98,6 +111,7 @@ export default class TicketTable extends React.Component {
                 }, 600);
                 this.props.updateTicket(
                   oldData.id,
+                  newData.title,
                   newData.description,
                   newData.price,
                   newData.imageUrl,
@@ -114,7 +128,6 @@ export default class TicketTable extends React.Component {
                     data.splice(data.indexOf(oldData), 1);
                     return { ...prevState, data };
                   });
-                  console.log(oldData);
                   this.props.deleteTicket(oldData.id, this.props.user.token);
                 }, 600);
               })
