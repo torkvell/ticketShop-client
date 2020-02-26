@@ -184,7 +184,7 @@ export default function EnhancedTable(props) {
       ticket.title,
       ticket.description,
       ticket.price,
-      ticket.fraudRating
+      ticket.fraudRisk
     );
   });
 
@@ -254,7 +254,6 @@ export default function EnhancedTable(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  console.log("row", row);
                   const labelId = `${index}`;
 
                   return (
