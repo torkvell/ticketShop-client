@@ -17,7 +17,7 @@ class MyTicketContainer extends Component {
   };
 
   render() {
-    // console.log(`props for ticket table: `, this.props);
+    console.log(`props for ticket outer table: `, this.props);
     return (
       <div>
         <Container>
