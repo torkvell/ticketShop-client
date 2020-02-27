@@ -8,10 +8,17 @@ export function postComment(comment, ticketId, userId, token) {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     console.log("server response", response);
-    // if (!response.error) {
-    //   dispatch(newComment(response.data));
-    // } else {
-    //   dispatch(errorHandler(response.data));
-    // }
+    if (!response.data.error) {
+      dispatch(newTicketComment(response.data));
+    } else {
+      dispatch(errorHandler(response.data));
+    }
   };
+}
+function newTicketComment(data) {
+  return { type: "COMMENT_CREATED", payload: data };
+}
+
+function errorHandler(data) {
+  return { type: "ERROR", payload: data };
 }
