@@ -58,6 +58,14 @@ export class TicketContainer extends Component {
     this.setState({ ticketData: constructTicketData(this.props) });
   };
 
+  componentDidUpdate(prevProps) {
+    const prevTicketData = constructTicketData(prevProps);
+    const newTicketData = constructTicketData(this.props);
+    if (newTicketData.comments.length !== prevTicketData.comments.length) {
+      this.setState({ ticketData: constructTicketData(this.props) });
+    }
+  }
+
   render() {
     if (this.state.ticketData) {
       return (
