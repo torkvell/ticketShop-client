@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import TicketCard from "./TicketCard";
+import { Container } from "@material-ui/core";
 
 const getEventId = props => {
   const qs = require("qs");
@@ -22,7 +24,6 @@ const constructTicketData = props => {
   const ticketIdUrl = parseInt(props.location.pathname.slice(-1));
   const ticketData = eventWithTicket.tickets.reduce((acc, currentTicket) => {
     if (currentTicket.id === ticketIdUrl) {
-      console.log("im here");
       return currentTicket;
     }
     return acc;
@@ -33,7 +34,21 @@ const constructTicketData = props => {
 
 export class TicketContainer extends Component {
   state = {
-    ticketData: null
+    ticketData: null,
+    comment: ""
+  };
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    //call some function from action.js
+    console.log(`comment`);
+    this.setState({ comment: "" });
   };
 
   componentDidMount = () => {
@@ -43,10 +58,14 @@ export class TicketContainer extends Component {
   render() {
     if (this.state.ticketData) {
       return (
-        <div>
-          Ticket Info page!Ticket id:{this.state.ticketData.id}. Ticket title:{" "}
-          {this.state.ticketData.title}
-        </div>
+        <Container>
+          <TicketCard
+            ticketData={this.state.ticketData}
+            comment={this.state.comment}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          ></TicketCard>
+        </Container>
       );
     } else {
       return <div>Loading..</div>;
