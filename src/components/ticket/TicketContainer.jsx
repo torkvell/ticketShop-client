@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import TicketCard from "./TicketCard";
+import { Container } from "@material-ui/core";
 
 const getEventId = props => {
   const qs = require("qs");
@@ -22,7 +24,6 @@ const constructTicketData = props => {
   const ticketIdUrl = parseInt(props.location.pathname.slice(-1));
   const ticketData = eventWithTicket.tickets.reduce((acc, currentTicket) => {
     if (currentTicket.id === ticketIdUrl) {
-      console.log("im here");
       return currentTicket;
     }
     return acc;
@@ -43,10 +44,9 @@ export class TicketContainer extends Component {
   render() {
     if (this.state.ticketData) {
       return (
-        <div>
-          Ticket Info page!Ticket id:{this.state.ticketData.id}. Ticket title:{" "}
-          {this.state.ticketData.title}
-        </div>
+        <Container>
+          <TicketCard ticketData={this.state.ticketData}></TicketCard>
+        </Container>
       );
     } else {
       return <div>Loading..</div>;
