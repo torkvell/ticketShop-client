@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TicketCard from "./TicketCard";
 import { Container } from "@material-ui/core";
+import { postComment } from "../../redux/comment/action";
 
 const getEventId = props => {
   const qs = require("qs");
@@ -46,8 +47,12 @@ export class TicketContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    //call some function from action.js
-    console.log(`comment`);
+    this.props.postComment(
+      this.state.comment,
+      this.state.ticketData.id,
+      this.props.user.id,
+      this.props.user.token
+    );
     this.setState({ comment: "" });
   };
 
@@ -75,8 +80,9 @@ export class TicketContainer extends Component {
 
 const mapStateToProps = reduxState => {
   return {
-    events: reduxState.events
+    events: reduxState.events,
+    user: reduxState.user
   };
 };
 
-export default connect(mapStateToProps)(TicketContainer);
+export default connect(mapStateToProps, { postComment })(TicketContainer);
