@@ -32,7 +32,20 @@ export default function EventTable(props) {
       <MaterialTable
         title="My Events"
         columns={state.columns}
-        data={state.data}
+        data={
+          props.user.events
+            ? props.user.events.map(event => {
+                return {
+                  id: event.id,
+                  name: event.name,
+                  description: event.description,
+                  startDate: event.startDate,
+                  endDate: event.endDate,
+                  imageURL: event.imageUrl
+                };
+              })
+            : []
+        }
         editable={{
           onRowAdd: newData =>
             new Promise(resolve => {
