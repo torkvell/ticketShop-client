@@ -19,6 +19,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import { Link } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -176,15 +177,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function EnhancedTable(props) {
-  function createData(title, description, price, fraudRating, picture) {
-    return { title, description, price, fraudRating, picture };
+  function createData(title, description, price, fraudRating, id) {
+    return { title, description, price, fraudRating, id };
   }
   const rows = props.ticketArray.map(ticket => {
     return createData(
       ticket.title,
       ticket.description,
       ticket.price,
-      ticket.fraudRisk
+      ticket.fraudRisk,
+      ticket.id
     );
   });
 
@@ -211,7 +213,9 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {};
+  const handleClick = (event, ticketId) => {
+    console.log(`event ${event}, id: ${ticketId}`);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -254,18 +258,17 @@ export default function EnhancedTable(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const labelId = `${index}`;
-
+                  console.log("row", row);
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.id)}
+                      onClick={() => props.toTicketDetailPage(row.id)}
                       tabIndex={-1}
-                      key={row.id}
+                      key={index}
                     >
                       <TableCell
                         component="th"
-                        id={labelId}
+                        id={index}
                         scope="row"
                         paddingLeft="30px"
                       >

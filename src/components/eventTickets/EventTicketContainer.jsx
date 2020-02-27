@@ -1,47 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TicketTable from "../tickets/TicketTable";
+import TicketTable from "./EventTicketTable";
 import { Container } from "@material-ui/core";
 import { getFraudCalculationEventTickets } from "../../redux/events/actions";
-
-const qs = require("qs");
-
+const getEventId = props => {
+  const qs = require("qs");
+  return parseInt(
+    qs.parse(props.location.search, {
+      ignoreQueryPrefix: true
+    }).eventId
+  );
+};
 class TicketContainer extends Component {
   componentDidMount = () => {
-    const eventId = parseInt(
-      qs.parse(this.props.location.search, {
-        ignoreQueryPrefix: true
-      }).eventId
+    this.props.getFraudCalculationEventTickets(getEventId(this.props));
+  };
+  toTicketDetailPage = ticketId => {
+    this.props.history.push(
+      `/ticket/${ticketId}?eventId=${getEventId(this.props)}`
     );
-    this.props.getFraudCalculationEventTickets(eventId);
   };
   render() {
-    const eventId = parseInt(
-      qs.parse(this.props.location.search, {
-        ignoreQueryPrefix: true
-      }).eventId
+    const eventArray = this.props.events.filter(
+      event => event.id === getEventId(this.props)
     );
-    const eventArray = this.props.events.filter(event => event.id === eventId);
-    const ticketArray = eventArray[0].tickets;
-    const eventName = eventArray[0].name;
+    const ticketArray = eventArray ? eventArray[0].tickets : [];
+    const eventName = eventArray ? eventArray[0].name : [];
     console.log("ticket array: ", ticketArray);
     return (
       <Container>
         <TicketTable
           ticketArray={ticketArray}
           eventName={eventName}
+          toTicketDetailPage={this.toTicketDetailPage}
         ></TicketTable>
       </Container>
     );
   }
 }
-
 const mapStateToProps = reduxState => {
   return {
     events: reduxState.events
   };
 };
-
 export default connect(mapStateToProps, { getFraudCalculationEventTickets })(
   TicketContainer
 );

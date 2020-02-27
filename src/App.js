@@ -4,7 +4,8 @@ import NavigationBar from "./components/navbar/NavBarContainer";
 import LoginContainer from "./components/user/login/LoginContainer";
 import SignUpContainer from "./components/user/signup/SignUpContainer";
 import EventContainer from "./components/events/EventContainer";
-import TicketContainer from "./components/tickets/TicketContainer";
+import EventTicketContainer from "./components/eventTickets/EventTicketContainer";
+import TicketContainer from "./components/ticket/TicketContainer";
 import Shop from "./components/shop/";
 import Cart from "./components/cart/";
 import MyTicketContainer from "./components/user/myTickets/MyticketContainer";
@@ -28,7 +29,8 @@ class App extends Component {
           <Route path="/shop" component={Shop} />
           <Route path="/mytickets" component={MyTicketContainer} />
           <Route path="/myevents" component={MyEventContainer} />
-          <Route path="/ticket" component={TicketContainer} />
+          <Route path="/eventTickets/" component={EventTicketContainer} />
+          <Route path="/ticket/" component={TicketContainer} />
           <Route path="/" exact component={EventContainer} />
         </Switch>
       </div>
