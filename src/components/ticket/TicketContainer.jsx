@@ -34,7 +34,21 @@ const constructTicketData = props => {
 
 export class TicketContainer extends Component {
   state = {
-    ticketData: null
+    ticketData: null,
+    comment: ""
+  };
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    //call some function from action.js
+    console.log(`comment`);
+    this.setState({ comment: "" });
   };
 
   componentDidMount = () => {
@@ -45,7 +59,12 @@ export class TicketContainer extends Component {
     if (this.state.ticketData) {
       return (
         <Container>
-          <TicketCard ticketData={this.state.ticketData}></TicketCard>
+          <TicketCard
+            ticketData={this.state.ticketData}
+            comment={this.state.comment}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          ></TicketCard>
         </Container>
       );
     } else {
