@@ -20,7 +20,6 @@ const constructTicketData = props => {
     if (currentEvent.id === eventIdUrl) return currentEvent;
     return acc;
   });
-  console.log("eventWithTicket", eventWithTicket);
   //define ticket data obj from tickets array in event data obj
   const ticketIdUrl = parseInt(props.location.pathname.slice(-1));
   const ticketData = eventWithTicket.tickets.reduce((acc, currentTicket) => {
@@ -29,7 +28,6 @@ const constructTicketData = props => {
     }
     return acc;
   });
-  console.log("ticketdata constructticketdata", ticketData);
   return ticketData;
 };
 
