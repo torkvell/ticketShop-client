@@ -10,12 +10,12 @@ import Cart from "./components/cart/";
 import MyTicketContainer from "./components/user/myTickets/MyticketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
 import "./App.css";
-import { getAllEvents } from "./redux/events/actions";
+import { getAllEventData } from "./redux/events/actions";
 import { connect } from "react-redux";
 
 class App extends Component {
   componentDidMount = () => {
-    this.props.getAllEvents();
+    this.props.getAllEventData();
   };
   render() {
     return (
@@ -37,5 +37,5 @@ class App extends Component {
 }
 
 export default connect(null, {
-  getAllEvents
+  getAllEventData
 })(App);

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function getAllEvents() {
+export function getAllEventData() {
   return async function(dispatch, getState) {
     const response = await axios.get("http://localhost:4000/event/all");
     console.log(`server response get all events: `, response);

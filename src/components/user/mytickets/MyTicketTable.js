@@ -31,7 +31,7 @@ export default class TicketTable extends React.Component {
     data: this.props.user.tickets
       ? this.props.user.tickets.map(ticket => {
           const eventForCurrentTicket = this.props.events.filter(
-            event => ticket.eventId == event.id
+            event => ticket.eventId === event.id
           )[0];
           const eventName = eventForCurrentTicket
             ? eventForCurrentTicket.name
@@ -60,7 +60,7 @@ export default class TicketTable extends React.Component {
             this.props.user.tickets
               ? this.props.user.tickets.map(ticket => {
                   const eventForCurrentTicket = this.props.events.filter(
-                    event => ticket.eventId == event.id
+                    event => ticket.eventId === event.id
                   )[0];
                   const eventName = eventForCurrentTicket
                     ? eventForCurrentTicket.name
