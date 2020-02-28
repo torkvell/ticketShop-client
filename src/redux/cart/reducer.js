@@ -3,7 +3,8 @@ const initialState = [];
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case "ADD_PRODUCT_CART": {
-      const product = action.payload[0];
+      const product = action.payload;
+      console.log(`product`, product);
       const isInCart = state.some(
         cartItem => cartItem.product.id === product.id
       );

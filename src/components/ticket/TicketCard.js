@@ -105,7 +105,7 @@ export default function RecipeReviewCard(props) {
           color="primary"
           variant="contained"
           fullWidth
-          onClick={() => props.addToCart(props.ticketData.id)}
+          onClick={() => props.addProductToCart(props.ticketData)}
         >
           BUY NOW
         </Button>
