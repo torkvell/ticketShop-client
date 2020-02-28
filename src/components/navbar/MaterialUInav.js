@@ -294,11 +294,13 @@ export default function PrimarySearchAppBar(props) {
             />
           </div> */}
           <div className={classes.grow} />
-          <IconButton aria-label="shopping cart icon" color="inherit">
-            <Badge badgeContent={props.cart.length} color="secondary">
-              <ShoppingCartOutlinedIcon />
-            </Badge>
-          </IconButton>
+          <Link className={classes.navLinkWhite} to="/cart">
+            <IconButton aria-label="shopping cart icon" color="inherit">
+              <Badge badgeContent={props.cart.length} color="secondary">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
+          </Link>
           <div className={classes.sectionDesktop}>
             {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">

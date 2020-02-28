@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TicketCard from "./TicketCard";
 import { Container } from "@material-ui/core";
-import { postComment } from "../../redux/comment/action";
+import { postComment } from "../../redux/comment/actions";
+import { addProductToCart } from "../../redux/cart/actions";
 
 const getEventId = props => {
   const qs = require("qs");
@@ -83,6 +84,7 @@ export class TicketContainer extends Component {
             comment={this.state.comment}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            addProductToCart={this.props.addProductToCart}
           ></TicketCard>
         </Container>
       );
@@ -99,4 +101,6 @@ const mapStateToProps = reduxState => {
   };
 };
 
-export default connect(mapStateToProps, { postComment })(TicketContainer);
+export default connect(mapStateToProps, { postComment, addProductToCart })(
+  TicketContainer
+);
