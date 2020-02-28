@@ -8,6 +8,7 @@ class NavBar extends Component {
   render() {
     return (
       <MaterialUInav
+        cart={this.props.cart}
         user={this.props.user}
         logOut={() => {
           this.props.logOut();
@@ -20,7 +21,8 @@ class NavBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    cart: state.cart
   };
 }
 

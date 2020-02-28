@@ -24,6 +24,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import StarIcon from "@material-ui/icons/Star";
 import EventIcon from "@material-ui/icons/Event";
 import HomeIcon from "@material-ui/icons/Home";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 
 const useStyles = makeStyles(theme => ({
   navWrapper: {
@@ -279,7 +280,7 @@ export default function PrimarySearchAppBar(props) {
           <Typography className={classes.title} variant="h6" noWrap>
             TicketShop
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -291,17 +292,17 @@ export default function PrimarySearchAppBar(props) {
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
+          <IconButton aria-label="shopping cart icon" color="inherit">
+            <Badge badgeContent={props.cart.length} color="secondary">
+              <ShoppingCartOutlinedIcon />
+            </Badge>
+          </IconButton>
           <div className={classes.sectionDesktop}>
             {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
               </Badge>
             </IconButton> */}
             <IconButton
