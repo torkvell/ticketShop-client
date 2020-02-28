@@ -48,15 +48,14 @@ export default function RecipeReviewCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const ticketStartDate = props.event.startDate.slice(0, 10);
+  const ticketStartTime = props.event.startDate.substr(11, 5);
+  const ticketEndDate = props.event.endDate.slice(0, 10);
+  const ticketEndTime = props.event.endDate.substr(11, 5);
 
   return (
-    <Card className={classes.root} >
+    <Card className={classes.root}>
       <CardHeader
-        // avatar={
-        //   <Avatar aria-label="recipe" className={classes.avatar}>
-        //     R
-        //   </Avatar>
-        // }
         // action={
         //   <IconButton aria-label="settings">
         //     <MoreVertIcon />
@@ -68,11 +67,14 @@ export default function RecipeReviewCard(props) {
           </Avatar>
         }
         title={props.ticketData.title}
-        subheader="TODO: get event date: September 14, 2016"
+        subheader={("Seller: ", props.ticketData.ownerName)}
       />
       <CardMedia className={classes.media} image={props.ticketData.imageUrl} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
+          Start: {ticketStartDate} {ticketStartTime} | End: {ticketEndDate}{" "}
+          {ticketEndTime}
+          <br></br>
           {props.ticketData.description}
         </Typography>
       </CardContent>
@@ -83,7 +85,7 @@ export default function RecipeReviewCard(props) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        Fraud risk: {props.ticketData.fraudRisk}
+        <Typography>Fraud: {props.ticketData.fraudRisk}</Typography>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -95,8 +97,16 @@ export default function RecipeReviewCard(props) {
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
+      <CardActions disableSpacing>
+        <Button color="primary" variant="contained" fullWidth>
+          BUY NOW
+        </Button>
+      </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
+          {props.ticketData.comments.map(comment => {
+            return <Typography paragraph>{comment.comment}</Typography>;
+          })}
           <Typography paragraph>
             <form onSubmit={props.handleSubmit}>
               <TextField
@@ -118,9 +128,6 @@ export default function RecipeReviewCard(props) {
               </Button>
             </form>
           </Typography>
-          {props.ticketData.comments.map(comment => {
-            return <Typography paragraph>{comment.comment}</Typography>;
-          })}
         </CardContent>
       </Collapse>
     </Card>

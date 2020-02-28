@@ -248,6 +248,25 @@ function eventDeleted(data) {
   return { type: "EVENT_DELETED", payload: data };
 }
 
+// export function getPublicUserData(userId) {
+//   return async function(dispatch, getState) {
+//     console.log(`thunk get pub data`, userId);
+//     const response = await axios.get(
+//       `http://localhost:4000/user/public/${userId}`
+//     );
+//     console.log(`server response public user data: `, response);
+//     if (!response.data.error) {
+//       dispatch(publicUserData(response.data));
+//     } else {
+//       dispatch(errorHandler(response.data));
+//     }
+//   };
+// }
+
+// function publicUserData(data) {
+//   return { type: "TICKET_USER_DATA_PUBLIC", payload: data };
+// }
+
 /*--------------------ERROR HANDLING--------------------*/
 
 function errorHandler(data) {
