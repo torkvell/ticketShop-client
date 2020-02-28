@@ -6,7 +6,6 @@ import SignUpContainer from "./components/user/signup/SignUpContainer";
 import EventContainer from "./components/events/EventContainer";
 import EventTicketContainer from "./components/eventTickets/EventTicketContainer";
 import TicketContainer from "./components/ticket/TicketContainer";
-import Shop from "./components/shop/";
 import Cart from "./components/cart/";
 import MyTicketContainer from "./components/user/myTickets/MyticketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
@@ -26,7 +25,6 @@ class App extends Component {
           <Route path="/cart" component={Cart} />
           <Route path="/login" component={LoginContainer} />
           <Route path="/signup" component={SignUpContainer} />
-          <Route path="/shop" component={Shop} />
           <Route path="/mytickets" component={MyTicketContainer} />
           <Route path="/myevents" component={MyEventContainer} />
           <Route path="/eventTickets/" component={EventTicketContainer} />
