@@ -101,7 +101,12 @@ export default function RecipeReviewCard(props) {
         </IconButton>
       </CardActions>
       <CardActions disableSpacing>
-        <Button color="primary" variant="contained" fullWidth>
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          onClick={() => props.addToCart(props.ticketData.id)}
+        >
           BUY NOW
         </Button>
       </CardActions>
