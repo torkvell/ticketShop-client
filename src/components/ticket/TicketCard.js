@@ -50,7 +50,7 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} >
       <CardHeader
         // avatar={
         //   <Avatar aria-label="recipe" className={classes.avatar}>
