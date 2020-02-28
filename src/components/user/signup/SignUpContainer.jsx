@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import SignUpForm from "./SignUpForm";
 import { signUp } from "../../../redux/user/actions.js";
-import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 
 class SignUpContainer extends Component {

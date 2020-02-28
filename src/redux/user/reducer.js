@@ -58,7 +58,7 @@ export default (state = initialState, action = {}) => {
       console.log("ticket updated reducer");
       const ticketIdUpdated = action.payload.id;
       const newTicketArray = state.tickets.map(ticket => {
-        if (ticket.id == ticketIdUpdated) {
+        if (ticket.id === ticketIdUpdated) {
           return action.payload;
         } else {
           return ticket;

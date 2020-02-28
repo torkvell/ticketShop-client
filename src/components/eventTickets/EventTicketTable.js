@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,13 +12,14 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import { Link } from "react-router-dom";
+// import IconButton from "@material-ui/core/IconButton";
+// import Tooltip from "@material-ui/core/Tooltip";
+// import clsx from "clsx";
+// import DeleteIcon from "@material-ui/icons/Delete";
+// import FilterListIcon from "@material-ui/icons/FilterList";
+// import { Link } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -70,14 +70,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    rowCount,
-    onRequestSort
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
@@ -192,7 +185,7 @@ export default function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("description");
-  const [selected, setSelected] = React.useState([]);
+  const [setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -212,9 +205,9 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, ticketId) => {
-    console.log(`event ${event}, id: ${ticketId}`);
-  };
+  // const handleClick = (event, ticketId) => {
+  //   console.log(`event ${event}, id: ${ticketId}`);
+  // };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -229,7 +222,7 @@ export default function EnhancedTable(props) {
     setDense(event.target.checked);
   };
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  // const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -271,7 +264,7 @@ export default function EnhancedTable(props) {
                         component="th"
                         id={index}
                         scope="row"
-                        paddingLeft="30px"
+                        paddingleft="30px"
                       >
                         {row.title}
                       </TableCell>

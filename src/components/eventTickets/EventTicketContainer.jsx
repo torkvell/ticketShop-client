@@ -22,7 +22,6 @@ class TicketContainer extends Component {
     );
     const ticketArray = eventArray ? eventArray[0].tickets : [];
     const eventName = eventArray ? eventArray[0].name : [];
-    console.log("ticket array: ", ticketArray);
     return (
       <Container>
         <TicketTable

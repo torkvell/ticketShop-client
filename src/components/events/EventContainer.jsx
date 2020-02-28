@@ -4,7 +4,6 @@ import EventCard from "./EventCard.js";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Paginator from "./Paginator";
-import { makeStyles } from "@material-ui/core/styles";
 
 class EventContainer extends Component {
   state = {
