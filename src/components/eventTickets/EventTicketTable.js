@@ -125,16 +125,6 @@ const useToolbarStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1)
   },
-  highlight:
-    theme.palette.type === "light"
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
-        },
   title: {
     flex: "1 1 100%"
   }
@@ -173,6 +163,15 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     top: 20,
     width: 1
+  },
+  red: {
+    backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+  },
+  green: {
+    backgroundColor: "#90ee90"
+  },
+  dataRow: {
+    cursor: "pointer"
   }
 }));
 
@@ -241,7 +240,7 @@ export default function EnhancedTable(props) {
         <EnhancedTableToolbar eventName={props.eventName} />
         <TableContainer>
           <Table
-            className={classes.table}
+            className={(classes.table, classes.dataRow)}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
             aria-label="enhanced table"
@@ -258,9 +257,11 @@ export default function EnhancedTable(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  console.log("row", row);
                   return (
                     <TableRow
+                      className={
+                        row.fraudRating > 50 ? classes.red : classes.green
+                      }
                       hover
                       onClick={() => props.toTicketDetailPage(row.id)}
                       tabIndex={-1}
