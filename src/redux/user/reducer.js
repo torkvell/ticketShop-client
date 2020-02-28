@@ -55,9 +55,8 @@ export default (state = initialState, action = {}) => {
         tickets: updatedTickets
       };
     case "TICKET_UPDATED":
-      console.log("ticket_updated reducer");
+      console.log("ticket updated reducer");
       const ticketIdUpdated = action.payload.id;
-      console.log("ticket id updated", ticketIdUpdated);
       const newTicketArray = state.tickets.map(ticket => {
         if (ticket.id == ticketIdUpdated) {
           return action.payload;
@@ -65,7 +64,6 @@ export default (state = initialState, action = {}) => {
           return ticket;
         }
       });
-      console.log("new ticket array", newTicketArray);
       return {
         ...state,
         tickets: newTicketArray

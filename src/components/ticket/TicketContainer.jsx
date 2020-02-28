@@ -45,6 +45,9 @@ export class TicketContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    if (!this.props.user.userLoggedIn) {
+      alert("You must be logged in to post comments");
+    }
     this.props.postComment(
       this.state.comment,
       this.state.ticketData.id,
@@ -67,10 +70,15 @@ export class TicketContainer extends Component {
   }
 
   render() {
+    const eventWithTicket = this.props.events.reduce((acc, currentEvent) => {
+      if (currentEvent.id === getEventId(this.props)) return currentEvent;
+      return acc;
+    });
     if (this.state.ticketData) {
       return (
         <Container>
           <TicketCard
+            event={eventWithTicket}
             ticketData={this.state.ticketData}
             comment={this.state.comment}
             handleChange={this.handleChange}
