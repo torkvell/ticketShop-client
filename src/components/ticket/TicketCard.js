@@ -62,12 +62,14 @@ export default function RecipeReviewCard(props) {
         //   </IconButton>
         // }
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
+          <Avatar
+            aria-label="recipe"
+            className={classes.avatar}
+            image={props.ticketData.imageUrl}
+          ></Avatar>
         }
         title={props.ticketData.title}
-        subheader={("Seller: ", props.ticketData.ownerName)}
+        subheader={`Ticket owner: ${props.ticketData.ownerName}`}
       />
       <CardMedia className={classes.media} image={props.ticketData.imageUrl} />
       <CardContent>
@@ -85,7 +87,8 @@ export default function RecipeReviewCard(props) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <Typography>Fraud: {props.ticketData.fraudRisk}</Typography>
+        <Typography>Fraud risk: {props.ticketData.fraudRisk}</Typography>
+        <Typography>Price: {props.ticketData.price}</Typography>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
