@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getAllEventData } from "../events/actions";
 
 /*--------------------SIGN UP--------------------*/
 
@@ -224,7 +223,6 @@ export function createEvent(
 }
 
 function eventCreated(data) {
-  getAllEventData();
   return { type: "EVENT_CREATED", payload: data };
 }
 
