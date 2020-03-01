@@ -18,6 +18,7 @@ class App extends Component {
     this.props.getAllEventData();
   };
   render() {
+    console.log("Redux state:", this.props.state);
     return (
       <div className="App">
         <NavigationBar />
@@ -36,6 +37,12 @@ class App extends Component {
   }
 }
 
-export default connect(null, {
+function mapStateToProps(state) {
+  return {
+    state: state
+  };
+}
+
+export default connect(mapStateToProps, {
   getAllEventData
 })(App);

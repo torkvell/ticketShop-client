@@ -4,17 +4,31 @@ import axios from "axios";
 
 export function signUp(firstName, lastName, email, password) {
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/user/create", {
-      firstName,
-      lastName,
-      email,
-      password
-    });
-    console.log(`server response sign up: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.post("http://localhost:4000/user/signup", {
+        firstName,
+        lastName,
+        email,
+        password
+      });
+      // Success 🎉
       dispatch(signUpSuccess(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      //https://github.com/axios/axios#handling-errors
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
+      // console.log(error);
     }
   };
 }
@@ -27,15 +41,27 @@ function signUpSuccess(data) {
 
 export function logIn(email, password) {
   return async function(dispatch, getState) {
-    const response = await axios.post("http://localhost:4000/user/login", {
-      email,
-      password
-    });
-    console.log(`server response login: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.post("http://localhost:4000/user/login", {
+        email,
+        password
+      });
+      // Success 🎉
       dispatch(loginSuccess(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -43,7 +69,7 @@ export function logIn(email, password) {
 function loginSuccess(data) {
   return {
     type: "LOGIN_SUCCESS",
-    payload: data //TOCHECK: Should we do destructuring here of data?
+    payload: data
   };
 }
 
@@ -62,16 +88,27 @@ function logOutSuccess() {
 /*--------------------MY TICKETS--------------------*/
 
 export function getMyTickets(userId) {
-  console.log(`thunk get my tickets. userId: ${userId}`);
   return async function(dispatch, getState) {
-    const response = await axios.get(
-      `http://localhost:4000/ticket/user/${userId}`
-    );
-    console.log(`server response get user tickets: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/user/${userId}/ticket`
+      );
+      // Success 🎉
       dispatch(updateUserTickets(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -90,23 +127,34 @@ export function createTicket(
   token
 ) {
   return async function(dispatch, getState) {
-    const response = await axios.post(
-      "http://localhost:4000/ticket/create",
-      {
-        title,
-        description,
-        price,
-        imageURL,
-        userId,
-        eventId
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log(`server response create ticket: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/user/${userId}/ticket/`,
+        {
+          title,
+          description,
+          price,
+          imageURL,
+          eventId
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // Success 🎉
       dispatch(ticketCreated(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -115,20 +163,29 @@ function ticketCreated(data) {
   return { type: "TICKET_CREATED", payload: data };
 }
 
-export function deleteTicket(id, token) {
+export function deleteTicket(userId, ticketId, token) {
   return async function(dispatch, getState) {
-    const response = await axios.post(
-      "http://localhost:4000/ticket/delete",
-      {
-        id
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log(`server response delete ticket: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/user/${userId}/ticket/${ticketId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // Success 🎉
       dispatch(ticketDeleted(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -138,31 +195,44 @@ function ticketDeleted(data) {
 }
 
 export function updateTicket(
-  id,
+  ticketId,
   title,
   description,
   price,
   imageUrl,
   eventId,
-  token
+  token,
+  userId
 ) {
   return async function(dispatch, getState) {
-    const response = await axios.put(
-      `http://localhost:4000/ticket/update/${id}`,
-      {
-        title,
-        description,
-        price,
-        imageUrl,
-        eventId
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log(`server response update ticket: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/user/${userId}/ticket/${ticketId}`,
+        {
+          title,
+          description,
+          price,
+          imageUrl,
+          eventId
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // Success 🎉
       dispatch(ticketUpdated(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -175,14 +245,26 @@ function ticketUpdated(data) {
 
 export function getMyEvents(userId) {
   return async function(dispatch, getState) {
-    const response = await axios.get(
-      `http://localhost:4000/event/all/${userId}`
-    );
-    console.log(`server response get user events: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/user/${userId}/event`
+      );
+      // Success 🎉
       dispatch(updateUserEvents(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -201,23 +283,34 @@ export function createEvent(
   token
 ) {
   return async function(dispatch, getState) {
-    const response = await axios.post(
-      "http://localhost:4000/event/create",
-      {
-        name,
-        imageUrl,
-        startDate,
-        endDate,
-        description,
-        userId
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log(`server response create event: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/user/${userId}/event`,
+        {
+          name,
+          imageUrl,
+          startDate,
+          endDate,
+          description
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // Success 🎉
       dispatch(eventCreated(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -226,20 +319,29 @@ function eventCreated(data) {
   return { type: "EVENT_CREATED", payload: data };
 }
 
-export function deleteEvent(id, token) {
+export function deleteEvent(eventId, token, userId) {
   return async function(dispatch, getState) {
-    const response = await axios.post(
-      "http://localhost:4000/event/delete",
-      {
-        id
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log(`server response delete event: `, response);
-    if (!response.data.error) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/user/${userId}/event/${eventId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // Success 🎉
       dispatch(eventDeleted(response.data));
-    } else {
-      dispatch(errorHandler(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
     }
   };
 }
@@ -248,24 +350,38 @@ function eventDeleted(data) {
   return { type: "EVENT_DELETED", payload: data };
 }
 
-// export function getPublicUserData(userId) {
-//   return async function(dispatch, getState) {
-//     console.log(`thunk get pub data`, userId);
-//     const response = await axios.get(
-//       `http://localhost:4000/user/public/${userId}`
-//     );
-//     console.log(`server response public user data: `, response);
-//     if (!response.data.error) {
-//       dispatch(publicUserData(response.data));
-//     } else {
-//       dispatch(errorHandler(response.data));
-//     }
-//   };
-// }
+/*--------------------USER COMMENT--------------------*/
 
-// function publicUserData(data) {
-//   return { type: "TICKET_USER_DATA_PUBLIC", payload: data };
-// }
+export function postComment(comment, ticketId, userId, token) {
+  return async function(dispatch) {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/user/${userId}/ticket/${ticketId}/comment`,
+        { comment, ticketId, userId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // Success 🎉
+      dispatch(newTicketComment(response.data));
+      dispatch(errorHandler(null));
+    } catch (error) {
+      // Error 😨
+      if (error.response) {
+        dispatch(errorHandler(error.response.data));
+      } else if (error.request) {
+        dispatch(
+          errorHandler(
+            "Something went wrong. The request was made but no response from server was received"
+          )
+        );
+      } else {
+        dispatch(errorHandler(`Something went wrong: ${error.message}`));
+      }
+    }
+  };
+}
+function newTicketComment(data) {
+  return { type: "COMMENT_CREATED", payload: data };
+}
 
 /*--------------------ERROR HANDLING--------------------*/
 

@@ -17,10 +17,16 @@ class MyTicketContainer extends Component {
   };
 
   render() {
-    console.log(`props for ticket outer table: `, this.props);
+    console.log(`props for my ticket container: `, this.props);
     return (
       <div>
         <Container>
+          {this.props.user.error ? (
+            <div>{this.props.user.error}</div>
+          ) : (
+            <div></div>
+          )}
+          <div></div>
           <TicketForm
             user={this.props.user}
             deleteTicket={this.props.deleteTicket}

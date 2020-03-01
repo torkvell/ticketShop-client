@@ -2,9 +2,9 @@ const initialState = {
   id: false,
   email: false,
   token: null,
-  error: null,
   tickets: null,
-  events: null
+  events: null,
+  error: null
 };
 
 export default (state = initialState, action = {}) => {
@@ -12,14 +12,12 @@ export default (state = initialState, action = {}) => {
     case "USER_CREATED":
       return { ...state, accountCreated: true };
     case "ERROR":
-      const errorMsg = action.payload.message;
-      return { ...state, error: errorMsg };
+      return { ...state, error: action.payload };
     case "USER_LOGOUT":
       return { ...initialState };
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        userLoggedIn: true,
         id: action.payload.id,
         email: action.payload.email,
         token: action.payload.token
@@ -34,18 +32,30 @@ export default (state = initialState, action = {}) => {
         ...state,
         events: action.payload
       };
-    case "TICKET_CREATED":
-      return {
-        ...state,
-        tickets: [...state.tickets, action.payload]
-      };
     case "EVENT_CREATED":
+      console.log("event created reducer", action.payload);
       return {
         ...state,
         events: [...state.events, action.payload]
       };
+    case "EVENT_DELETED":
+      console.log("event deleted reducer", action.payload);
+      const eventIdDeleted = action.payload;
+      const updatedEvents = state.events.filter(
+        event => event.id !== eventIdDeleted
+      );
+      return {
+        ...state,
+        events: updatedEvents
+      };
+    case "TICKET_CREATED":
+      console.log("ticket created reducer", action.payload);
+      return {
+        ...state,
+        tickets: [...state.tickets, action.payload]
+      };
     case "TICKET_DELETED":
-      console.log("ticket deleted reducer");
+      console.log("ticket deleted reducer", action.payload);
       const ticketIdDeleted = action.payload;
       const updatedTickets = state.tickets.filter(
         ticket => ticket.id !== ticketIdDeleted
@@ -55,7 +65,7 @@ export default (state = initialState, action = {}) => {
         tickets: updatedTickets
       };
     case "TICKET_UPDATED":
-      console.log("ticket updated reducer");
+      console.log("ticket updated reducer", action.payload);
       const ticketIdUpdated = action.payload.id;
       const newTicketArray = state.tickets.map(ticket => {
         if (ticket.id === ticketIdUpdated) {
@@ -67,16 +77,6 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         tickets: newTicketArray
-      };
-    case "EVENT_DELETED":
-      console.log("event deleted reducer");
-      const eventIdDeleted = action.payload;
-      const updatedEvents = state.events.filter(
-        event => event.id !== eventIdDeleted
-      );
-      return {
-        ...state,
-        events: updatedEvents
       };
     default:
       return state;

@@ -90,7 +90,7 @@ export default function EventTable(props) {
                   return { ...prevState, data };
                 });
                 console.log(oldData);
-                props.deleteEvent(oldData.id, props.user.token);
+                props.deleteEvent(oldData.id, props.user.token, props.user.id);
               }, 600);
             })
         }}
