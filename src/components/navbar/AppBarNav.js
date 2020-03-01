@@ -15,11 +15,12 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import EventIcon from "@material-ui/icons/Event";
-import HomeIcon from "@material-ui/icons/Home";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles(theme => ({
-  navWrapper: {
+  appBar: {
+    zIndex: 1400,
     marginBottom: theme.spacing(3)
   },
   grow: {
@@ -81,13 +82,23 @@ const useStyles = makeStyles(theme => ({
       display: "none"
     }
   },
-  navLink: {
-    color: "black !important",
-    textDecoration: "none !important"
+  navLinkBlack: {
+    color: "black",
+    textDecoration: "none",
+    "&:hover, &:focus": {
+      color: "black",
+      textDecoration: "none"
+    }
   },
   navLinkWhite: {
-    color: "white !important",
-    textDecoration: "none !important"
+    color: "white",
+    textDecoration: "none !important",
+    "&:hover, &:focus": {
+      color: "white"
+    }
+  },
+  desktopUserActions: {
+    display: "flex"
   }
 }));
 
@@ -128,24 +139,12 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {props.user.userLoggedIn ? (
+      {props.user.token ? (
         <div>
           <MenuItem onClick={handleMenuClose}>
             <PermIdentityOutlinedIcon></PermIdentityOutlinedIcon>
-            <Link className={classes.navLink} to="/profile">
+            <Link className={classes.navLinkBlack} to="/profile">
               &nbsp;&nbsp;Profile
-            </Link>
-          </MenuItem>
-          <MenuItem onClick={handleMenuClose}>
-            <ListAltIcon></ListAltIcon>
-            <Link className={classes.navLink} to="/mytickets">
-              &nbsp;&nbsp;My tickets
-            </Link>
-          </MenuItem>
-          <MenuItem onClick={handleMenuClose}>
-            <EventIcon></EventIcon>
-            <Link className={classes.navLink} to="/myevents">
-              &nbsp;&nbsp;My Events
             </Link>
           </MenuItem>
           <MenuItem onClick={props.logOut}>
@@ -157,13 +156,13 @@ export default function PrimarySearchAppBar(props) {
         <div>
           <MenuItem onClick={handleMenuClose}>
             <VpnKeyIcon />
-            <Link className={classes.navLink} to="/login">
+            <Link className={classes.navLinkBlack} to="/login">
               &nbsp;&nbsp;Log in
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <PersonAddIcon />
-            <Link className={classes.navLink} to="/signup">
+            <Link className={classes.navLinkBlack} to="/signup">
               &nbsp;&nbsp;Sign up
             </Link>
           </MenuItem>
@@ -184,50 +183,23 @@ export default function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {/* <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem> */}
-      {/* <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem> */}
-      {/* <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem> */}
-      {props.user.userLoggedIn ? (
+      {props.user.token ? (
         <div>
           <MenuItem onClick={handleMenuClose}>
             <PermIdentityOutlinedIcon></PermIdentityOutlinedIcon>
-            <Link className={classes.navLink} to="/profile">
+            <Link className={classes.navLinkBlack} to="/profile">
               &nbsp;&nbsp;Profile
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <ListAltIcon></ListAltIcon>
-            <Link className={classes.navLink} to="/mytickets">
+            <Link className={classes.navLinkBlack} to="/mytickets">
               &nbsp;&nbsp;My tickets
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <EventIcon></EventIcon>
-            <Link className={classes.navLink} to="/myevents">
+            <Link className={classes.navLinkBlack} to="/myevents">
               &nbsp;&nbsp;My Events
             </Link>
           </MenuItem>
@@ -240,13 +212,13 @@ export default function PrimarySearchAppBar(props) {
         <div>
           <MenuItem onClick={handleMenuClose}>
             <VpnKeyIcon />
-            <Link className={classes.navLink} to="/login">
+            <Link className={classes.navLinkBlack} to="/login">
               &nbsp;&nbsp;Log in
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <PersonAddIcon />
-            <Link className={classes.navLink} to="/signup">
+            <Link className={classes.navLinkBlack} to="/signup">
               &nbsp;&nbsp;Sign up
             </Link>
           </MenuItem>
@@ -256,8 +228,8 @@ export default function PrimarySearchAppBar(props) {
   );
 
   return (
-    <div className={(classes.grow, classes.navWrapper)}>
-      <AppBar position="static">
+    <div>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Link to="/" className={classes.navLinkWhite}>
             <IconButton
@@ -286,40 +258,103 @@ export default function PrimarySearchAppBar(props) {
             />
           </div> */}
           <div className={classes.grow} />
-          <Link className={classes.navLinkWhite} to="/cart">
-            <IconButton aria-label="shopping cart icon" color="inherit">
-              <Badge badgeContent={props.cart.length} color="secondary">
-                <ShoppingCartOutlinedIcon />
-              </Badge>
-            </IconButton>
-          </Link>
           <div className={classes.sectionDesktop}>
-            {/* <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton> */}
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            {props.user.token ? (
+              <div className={classes.desktopUserActions}>
+                <MenuItem onClick={handleMenuClose}>
+                  <ListAltIcon></ListAltIcon>
+                  <Link className={classes.navLinkWhite} to="/mytickets">
+                    &nbsp;&nbsp;My Tickets
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <EventIcon></EventIcon>
+                  <Link className={classes.navLinkWhite} to="/myevents">
+                    &nbsp;&nbsp;My Events
+                  </Link>
+                </MenuItem>
+              </div>
+            ) : (
+              <div className={classes.desktopUserActions}>
+                <MenuItem onClick={handleMenuClose}>
+                  <VpnKeyIcon />
+                  <Link className={classes.navLinkWhite} to="/login">
+                    &nbsp;&nbsp;Log in
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <PersonAddIcon />
+                  <Link className={classes.navLinkWhite} to="/signup">
+                    &nbsp;&nbsp;Sign up
+                  </Link>
+                </MenuItem>
+              </div>
+            )}
+            <Link className={classes.navLinkWhite} to="/cart">
+              <IconButton aria-label="shopping cart icon" color="inherit">
+                <Badge badgeContent={props.cart.length} color="secondary">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+            {props.user.token ? (
+              <IconButton
+                edge="end"
+                aria-label="account menu of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            ) : (
+              <div></div>
+            )}
           </div>
           <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            {props.user.token ? (
+              <div className={classes.desktopUserActions}>
+                <Link className={classes.navLinkWhite} to="/cart">
+                  <IconButton aria-label="shopping cart icon" color="inherit">
+                    <Badge badgeContent={props.cart.length} color="secondary">
+                      <ShoppingCartOutlinedIcon />
+                    </Badge>
+                  </IconButton>
+                </Link>
+                <IconButton
+                  aria-label="account menu of current user"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div>
+            ) : (
+              <div className={classes.desktopUserActions}>
+                <MenuItem onClick={handleMenuClose}>
+                  <VpnKeyIcon />
+                  <Link className={classes.navLinkWhite} to="/login">
+                    &nbsp;&nbsp;Log in
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <PersonAddIcon />
+                  <Link className={classes.navLinkWhite} to="/signup">
+                    &nbsp;&nbsp;Sign up
+                  </Link>
+                </MenuItem>
+                <Link className={classes.navLinkWhite} to="/cart">
+                  <IconButton aria-label="shopping cart icon" color="inherit">
+                    <Badge badgeContent={props.cart.length} color="secondary">
+                      <ShoppingCartOutlinedIcon />
+                    </Badge>
+                  </IconButton>
+                </Link>
+              </div>
+            )}
           </div>
         </Toolbar>
       </AppBar>
