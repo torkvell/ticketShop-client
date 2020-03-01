@@ -113,29 +113,22 @@ export default function RecipeReviewCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           {props.ticketData.comments.map(comment => {
-            return <Typography paragraph>{comment.comment}</Typography>;
+            return <Typography>{comment.comment}</Typography>;
           })}
-          <Typography paragraph>
-            <form onSubmit={props.handleSubmit}>
-              <TextField
-                id="outlined-basic"
-                label="Comment"
-                variant="outlined"
-                fullWidth
-                name="comment"
-                value={props.comment}
-                onChange={props.handleChange}
-              />
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                fullWidth
-              >
-                Comment
-              </Button>
-            </form>
-          </Typography>
+          <form onSubmit={props.handleSubmit}>
+            <TextField
+              id="outlined-basic"
+              label="Comment"
+              variant="outlined"
+              fullWidth
+              name="comment"
+              value={props.comment}
+              onChange={props.handleChange}
+            />
+            <Button type="submit" color="primary" variant="contained" fullWidth>
+              Comment
+            </Button>
+          </form>
         </CardContent>
       </Collapse>
     </Card>

@@ -22,9 +22,9 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
 
-  return props.events.map(event => {
+  return props.events.map((event, index) => {
     return (
-      <Grid item xs={12} sm={6} md={4} xl={3}>
+      <Grid key={index} item xs={12} sm={6} md={4} xl={3}>
         <Card>
           <CardActionArea>
             <CardMedia
