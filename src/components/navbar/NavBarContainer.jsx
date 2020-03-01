@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logOut } from "../../redux/user/actions.js";
-import MaterialUInav from "./MaterialUInav";
+import AppBarNav from "./AppBarNav";
 import { withRouter } from "react-router";
 
 class NavBar extends Component {
   render() {
     return (
-      <MaterialUInav
+      <AppBarNav
         cart={this.props.cart}
         user={this.props.user}
         logOut={() => {
