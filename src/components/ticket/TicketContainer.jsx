@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TicketCard from "./TicketCard";
 import { Container } from "@material-ui/core";
-import { postComment } from "../../redux/comment/actions";
+import { postComment } from "../../redux/user/actions";
 import { addProductToCart } from "../../redux/cart/actions";
 
 const getEventId = props => {
@@ -46,7 +46,7 @@ export class TicketContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!this.props.user.userLoggedIn) {
+    if (!this.props.user.token) {
       alert("You must be logged in to post comments");
     }
     this.props.postComment(

@@ -4,7 +4,6 @@ import Container from "@material-ui/core/Container";
 
 export default class TicketTable extends React.Component {
   onChangeEvent = id => {
-    console.log("onchange option input", id);
     this.setState({ eventId: id });
   };
   state = {
@@ -50,7 +49,6 @@ export default class TicketTable extends React.Component {
 
   render() {
     const msg = this.props.user.tickets ? true : false;
-    console.log(`my ticket table rendered. state: ${this.state} msg:${msg}`);
     return (
       <Container>
         <MaterialTable
@@ -116,7 +114,8 @@ export default class TicketTable extends React.Component {
                   newData.price,
                   newData.imageUrl,
                   this.state.eventId,
-                  this.props.user.token
+                  this.props.user.token,
+                  this.props.user.id
                 );
               }),
             onRowDelete: oldData =>
@@ -128,7 +127,11 @@ export default class TicketTable extends React.Component {
                     data.splice(data.indexOf(oldData), 1);
                     return { ...prevState, data };
                   });
-                  this.props.deleteTicket(oldData.id, this.props.user.token);
+                  this.props.deleteTicket(
+                    this.props.user.id,
+                    oldData.id,
+                    this.props.user.token
+                  );
                 }, 600);
               })
           }}
