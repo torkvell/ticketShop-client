@@ -1,9 +1,8 @@
 import axios from "axios";
 
 export function getAllEventData() {
-  return async function(dispatch, getState) {
+  return async function(dispatch) {
     const response = await axios.get("http://localhost:4000/event");
-    console.log(`server response get all event data: `, response);
     if (!response.data.error) {
       dispatch(eventsFethed(response.data));
     } else {
@@ -11,6 +10,7 @@ export function getAllEventData() {
     }
   };
 }
+
 function eventsFethed(data) {
   return { type: "ALL_EVENTS_FETCHED", payload: data };
 }

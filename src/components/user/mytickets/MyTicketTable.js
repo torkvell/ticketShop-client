@@ -90,7 +90,6 @@ export default class TicketTable extends React.Component {
                   newData.description,
                   newData.price,
                   newData.imageUrl,
-                  this.props.user.id,
                   this.state.eventId,
                   this.props.user.token
                 );
@@ -114,8 +113,7 @@ export default class TicketTable extends React.Component {
                   newData.price,
                   newData.imageUrl,
                   this.state.eventId,
-                  this.props.user.token,
-                  this.props.user.id
+                  this.props.user.token
                 );
               }),
             onRowDelete: oldData =>
@@ -127,11 +125,7 @@ export default class TicketTable extends React.Component {
                     data.splice(data.indexOf(oldData), 1);
                     return { ...prevState, data };
                   });
-                  this.props.deleteTicket(
-                    this.props.user.id,
-                    oldData.id,
-                    this.props.user.token
-                  );
+                  this.props.deleteTicket(oldData.id, this.props.user.token);
                 }, 600);
               })
           }}

@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import NavigationBar from "./components/navbar/NavBarContainer";
 import LoginContainer from "./components/user/login/LoginContainer";
 import SignUpContainer from "./components/user/signup/SignUpContainer";
 import EventContainer from "./components/events/EventContainer";
 import EventTicketContainer from "./components/eventTickets/EventTicketContainer";
 import TicketContainer from "./components/ticket/TicketContainer";
-import Cart from "./components/cart/";
 import MyTicketContainer from "./components/user/myTickets/MyticketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
-import "./App.css";
+import Cart from "./components/cart/";
 import { getAllEventData } from "./redux/events/actions";
-import { connect } from "react-redux";
+import "./App.css";
 
 class App extends Component {
   componentDidMount = () => {
     this.props.getAllEventData();
   };
   render() {
-    console.log("Redux state:", this.props.state);
     return (
       <div className="App">
         <NavigationBar />
@@ -37,12 +36,6 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    state: state
-  };
-}
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   getAllEventData
 })(App);

@@ -63,7 +63,6 @@ export default function EventTable(props) {
                 newData.startDate,
                 newData.endDate,
                 newData.description,
-                props.user.id,
                 props.user.token
               );
             }),
@@ -90,7 +89,7 @@ export default function EventTable(props) {
                   return { ...prevState, data };
                 });
                 console.log(oldData);
-                props.deleteEvent(oldData.id, props.user.token, props.user.id);
+                props.deleteEvent(oldData.id, props.user.token);
               }, 600);
             })
         }}
