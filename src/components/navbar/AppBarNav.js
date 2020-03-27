@@ -1,14 +1,17 @@
 import React from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
+import {
+  fade,
+  makeStyles,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Badge,
+  MenuItem,
+  Menu
+} from "@material-ui/core";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
 import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
@@ -244,7 +247,7 @@ export default function PrimarySearchAppBar(props) {
           <Typography className={classes.title} variant="h6" noWrap>
             TicketShop
           </Typography>
-          {/* <div className={classes.search}>
+          {/* <----SEARCH ICON----> <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>

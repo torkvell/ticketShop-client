@@ -4,31 +4,21 @@ import TicketCard from "./TicketCard";
 import { Container } from "@material-ui/core";
 import { postComment } from "../../redux/user/actions";
 import { addProductToCart } from "../../redux/cart/actions";
-
-const getEventId = props => {
-  const qs = require("qs");
-  return parseInt(
-    qs.parse(props.location.search, {
-      ignoreQueryPrefix: true
-    }).eventId
-  );
-};
+import { getEventId } from "../../utils/";
 
 const constructTicketData = props => {
   //define event data obj which contains the ticket to display
-  const eventIdUrl = getEventId(props);
-  const eventWithTicket = props.events.reduce((acc, currentEvent) => {
-    if (currentEvent.id === eventIdUrl) return currentEvent;
-    return acc;
+  const eventIdUrl = getEventId({
+    queryString: props.location.search
   });
+  const eventWithTicket = props.events.find(
+    currentEvent => currentEvent.id === eventIdUrl
+  );
   //define ticket data obj from tickets array in event data obj
   const ticketIdUrl = parseInt(props.location.pathname.slice(-1));
-  const ticketData = eventWithTicket.tickets.reduce((acc, currentTicket) => {
-    if (currentTicket.id === ticketIdUrl) {
-      return currentTicket;
-    }
-    return acc;
-  });
+  const ticketData = eventWithTicket.tickets.find(
+    currentTicket => currentTicket.id === ticketIdUrl
+  );
   return ticketData;
 };
 
@@ -45,16 +35,13 @@ export class TicketContainer extends Component {
   };
 
   handleSubmit = event => {
+    const { comment, ticketData } = this.state;
+    const { id: userId, token } = this.props.user;
     event.preventDefault();
     if (!this.props.user.token) {
       alert("You must be logged in to post comments");
     }
-    this.props.postComment(
-      this.state.comment,
-      this.state.ticketData.id,
-      this.props.user.id,
-      this.props.user.token
-    );
+    this.props.postComment(comment, ticketData.id, userId, token);
     this.setState({ comment: "" });
   };
 
@@ -71,10 +58,13 @@ export class TicketContainer extends Component {
   }
 
   render() {
-    const eventWithTicket = this.props.events.reduce((acc, currentEvent) => {
-      if (currentEvent.id === getEventId(this.props)) return currentEvent;
-      return acc;
-    });
+    const eventWithTicket = this.props.events.find(
+      currentEvent =>
+        currentEvent.id ===
+        getEventId({
+          queryString: this.props.location.search
+        })
+    );
     if (this.state.ticketData) {
       return (
         <Container>

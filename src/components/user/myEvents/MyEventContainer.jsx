@@ -13,9 +13,13 @@ class MyEventContainer extends Component {
   };
 
   render() {
-    // console.log(`props for ticket table: `, this.props);
     return (
       <div>
+        {this.props.user.error ? (
+          <div>{this.props.user.error}</div>
+        ) : (
+          <div></div>
+        )}
         <EventTable
           user={this.props.user}
           deleteEvent={this.props.deleteEvent}

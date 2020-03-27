@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import TicketForm from "./MyTicketTable";
 import {
   updateTicket,
@@ -6,18 +7,15 @@ import {
   deleteTicket,
   getMyTickets
 } from "../../../redux/user/actions";
-import { connect } from "react-redux";
 import { Container } from "@material-ui/core";
 
 class MyTicketContainer extends Component {
-  state = {};
-
   componentDidMount = () => {
     this.props.getMyTickets(this.props.user.id);
   };
 
   render() {
-    console.log(`props for my ticket container: `, this.props);
+    const { ...ticketContainerProps } = this.props;
     return (
       <div>
         <Container>
@@ -27,13 +25,8 @@ class MyTicketContainer extends Component {
             <div></div>
           )}
           <div></div>
-          <TicketForm
-            user={this.props.user}
-            deleteTicket={this.props.deleteTicket}
-            createTicket={this.props.createTicket}
-            updateTicket={this.props.updateTicket}
-            events={this.props.events}
-          />
+
+          <TicketForm {...ticketContainerProps} />
         </Container>
       </div>
     );

@@ -3,7 +3,7 @@ import axios from "axios";
 /*--------------------SIGN UP--------------------*/
 
 export function signUp(firstName, lastName, email, password) {
-  return async function(dispatch, getState) {
+  return async function(dispatch) {
     try {
       const response = await axios.post("http://localhost:4000/user/signup", {
         firstName,
@@ -15,7 +15,6 @@ export function signUp(firstName, lastName, email, password) {
       dispatch(signUpSuccess(response.data));
       dispatch(errorHandler(null));
     } catch (error) {
-      //https://github.com/axios/axios#handling-errors
       // Error 😨
       if (error.response) {
         dispatch(errorHandler(error.response.data));
@@ -28,7 +27,6 @@ export function signUp(firstName, lastName, email, password) {
       } else {
         dispatch(errorHandler(`Something went wrong: ${error.message}`));
       }
-      // console.log(error);
     }
   };
 }
@@ -88,7 +86,7 @@ function logOutSuccess() {
 /*--------------------MY TICKETS--------------------*/
 
 export function getMyTickets(userId) {
-  return async function(dispatch, getState) {
+  return async function(dispatch) {
     try {
       const response = await axios.get(
         `http://localhost:4000/user/${userId}/ticket`
@@ -121,20 +119,19 @@ export function createTicket(
   title,
   description,
   price,
-  imageURL,
-  userId,
+  imageUrl,
   eventId,
   token
 ) {
-  return async function(dispatch, getState) {
+  return async function(dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:4000/user/${userId}/ticket/`,
+        `http://localhost:4000/ticket/`,
         {
           title,
           description,
           price,
-          imageURL,
+          imageUrl,
           eventId
         },
         { headers: { Authorization: `Bearer ${token}` } }
@@ -163,11 +160,11 @@ function ticketCreated(data) {
   return { type: "TICKET_CREATED", payload: data };
 }
 
-export function deleteTicket(userId, ticketId, token) {
-  return async function(dispatch, getState) {
+export function deleteTicket(ticketId, token) {
+  return async function(dispatch) {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/user/${userId}/ticket/${ticketId}`,
+        `http://localhost:4000/ticket/${ticketId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       // Success 🎉
@@ -201,13 +198,12 @@ export function updateTicket(
   price,
   imageUrl,
   eventId,
-  token,
-  userId
+  token
 ) {
-  return async function(dispatch, getState) {
+  return async function(dispatch) {
     try {
       const response = await axios.put(
-        `http://localhost:4000/user/${userId}/ticket/${ticketId}`,
+        `http://localhost:4000/ticket/${ticketId}`,
         {
           title,
           description,
@@ -244,7 +240,7 @@ function ticketUpdated(data) {
 /*--------------------MY EVENTS--------------------*/
 
 export function getMyEvents(userId) {
-  return async function(dispatch, getState) {
+  return async function(dispatch) {
     try {
       const response = await axios.get(
         `http://localhost:4000/user/${userId}/event`
@@ -279,13 +275,12 @@ export function createEvent(
   startDate,
   endDate,
   description,
-  userId,
   token
 ) {
-  return async function(dispatch, getState) {
+  return async function(dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:4000/user/${userId}/event`,
+        `http://localhost:4000/event/`,
         {
           name,
           imageUrl,
@@ -319,11 +314,11 @@ function eventCreated(data) {
   return { type: "EVENT_CREATED", payload: data };
 }
 
-export function deleteEvent(eventId, token, userId) {
-  return async function(dispatch, getState) {
+export function deleteEvent(eventId, token) {
+  return async function(dispatch) {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/user/${userId}/event/${eventId}`,
+        `http://localhost:4000/event/${eventId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       // Success 🎉
@@ -356,7 +351,7 @@ export function postComment(comment, ticketId, userId, token) {
   return async function(dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:4000/user/${userId}/ticket/${ticketId}/comment`,
+        `http://localhost:4000/comment/${ticketId}`,
         { comment, ticketId, userId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

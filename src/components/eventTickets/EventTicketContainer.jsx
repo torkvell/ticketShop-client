@@ -1,41 +1,36 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TicketTable from "./EventTicketTable";
 import { Container } from "@material-ui/core";
-const getEventId = props => {
-  const qs = require("qs");
-  return parseInt(
-    qs.parse(props.location.search, {
-      ignoreQueryPrefix: true
-    }).eventId
-  );
-};
-class TicketContainer extends Component {
-  toTicketDetailPage = ticketId => {
-    this.props.history.push(
-      `/ticket/${ticketId}?eventId=${getEventId(this.props)}`
+import TicketTable from "./EventTicketTable";
+import { getEventId } from "../../utils/";
+
+const TicketContainer = props => {
+  const toTicketDetailPage = ticketId => {
+    props.history.push(
+      `/ticket/${ticketId}?eventId=${getEventId({
+        queryString: props.location.search
+      })}`
     );
   };
-  render() {
-    const eventArray = this.props.events.filter(
-      event => event.id === getEventId(this.props)
-    );
-    const ticketArray = eventArray ? eventArray[0].tickets : [];
-    const eventName = eventArray ? eventArray[0].name : [];
-    return (
-      <Container>
-        <TicketTable
-          ticketArray={ticketArray}
-          eventName={eventName}
-          toTicketDetailPage={this.toTicketDetailPage}
-        ></TicketTable>
-      </Container>
-    );
-  }
-}
-const mapStateToProps = reduxState => {
+  const eventArray = props.events.filter(
+    event => event.id === getEventId({ queryString: props.location.search })
+  );
+  const { tickets, name } = eventArray
+    ? eventArray[0]
+    : { tickets: [], name: [] };
+  return (
+    <Container>
+      <TicketTable
+        tickets={tickets}
+        eventName={name}
+        toTicketDetailPage={toTicketDetailPage}
+      ></TicketTable>
+    </Container>
+  );
+};
+const mapStateToProps = state => {
   return {
-    events: reduxState.events
+    events: state.events
   };
 };
 export default connect(mapStateToProps)(TicketContainer);

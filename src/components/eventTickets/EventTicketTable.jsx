@@ -1,25 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { lighten, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-// import IconButton from "@material-ui/core/IconButton";
-// import Tooltip from "@material-ui/core/Tooltip";
-// import clsx from "clsx";
-// import DeleteIcon from "@material-ui/icons/Delete";
-// import FilterListIcon from "@material-ui/icons/FilterList";
-// import { Link } from "react-router-dom";
+import {
+  lighten,
+  makeStyles,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper,
+  FormControlLabel,
+  Switch
+} from "@material-ui/core";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -78,20 +75,20 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {headCells.map(headCell => (
+        {headCells.map(({ id, numeric, disablePadding, label }) => (
           <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "default"}
-            sortDirection={orderBy === headCell.id ? order : false}
+            key={id}
+            align={numeric ? "right" : "left"}
+            padding={disablePadding ? "none" : "default"}
+            sortDirection={orderBy === id ? order : false}
           >
             <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
+              active={orderBy === id}
+              direction={orderBy === id ? order : "asc"}
+              onClick={createSortHandler(id)}
             >
-              {headCell.label}
-              {orderBy === headCell.id ? (
+              {label}
+              {orderBy === id ? (
                 <span className={classes.visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </span>
@@ -172,15 +169,12 @@ export default function EnhancedTable(props) {
   function createData(title, description, price, fraudRating, id) {
     return { title, description, price, fraudRating, id };
   }
-  const rows = props.ticketArray.map(ticket => {
-    return createData(
-      ticket.title,
-      ticket.description,
-      ticket.price,
-      ticket.fraudRisk,
-      ticket.id
-    );
-  });
+
+  const rows = props.tickets.map(
+    ({ title, description, price, fraudRisk, id }) => {
+      return createData(title, description, price, fraudRisk, id);
+    }
+  );
 
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
@@ -205,10 +199,6 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  // const handleClick = (event, ticketId) => {
-  //   console.log(`event ${event}, id: ${ticketId}`);
-  // };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -221,8 +211,6 @@ export default function EnhancedTable(props) {
   const handleChangeDense = event => {
     setDense(event.target.checked);
   };
-
-  // const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);

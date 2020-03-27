@@ -26,5 +26,4 @@ function mapStateToProps(state) {
   };
 }
 
-//TODO: Check if it's necessary with withRouter. There should be a way to pass the history prop from browserrouter
 export default withRouter(connect(mapStateToProps, { logOut })(NavBar));
