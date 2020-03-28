@@ -17,9 +17,13 @@ export default class TicketTable extends React.Component {
         editComponent: rowData => (
           <select onChange={e => this.onChangeEvent(e.target.value)}>
             <option>Select event</option>
-            {this.props.events.map(event => {
+            {this.props.events.map((event, index) => {
               //This event ID is used to insert ticket into db so we can connect the ticket to the correct event
-              return <option value={event.id}>{event.name}</option>;
+              return (
+                <option key={index} value={event.id}>
+                  {event.name}
+                </option>
+              );
             })}
           </select>
         )
@@ -48,7 +52,6 @@ export default class TicketTable extends React.Component {
   };
 
   render() {
-    const msg = this.props.user.tickets ? true : false;
     return (
       <Container>
         <MaterialTable
