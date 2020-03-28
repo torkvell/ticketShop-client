@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
 import {
-  makeStyles,
   Card,
   CardHeader,
   CardMedia,
@@ -14,12 +14,10 @@ import {
   Button,
   TextField
 } from "@material-ui/core/";
-import {
-  FavoriteIcon,
-  ShareIcon,
-  ExpandMoreIcon
-} from "@material-ui/icons/Favorite";
 import { red } from "@material-ui/core/colors";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeReviewCard(props) {
+export default function TicketCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -110,8 +108,8 @@ export default function RecipeReviewCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          {props.ticketData.comments.map(comment => {
-            return <Typography>{comment.comment}</Typography>;
+          {props.ticketData.comments.map((comment, index) => {
+            return <Typography key={index}>{comment.comment}</Typography>;
           })}
           <form onSubmit={props.handleSubmit}>
             <TextField

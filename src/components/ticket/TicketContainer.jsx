@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TicketCard from "./TicketCard";
 import { Container } from "@material-ui/core";
 import { postComment } from "../../redux/user/actions";
 import { addProductToCart } from "../../redux/cart/actions";
 import { getEventId } from "../../utils/";
+import TicketCard from "./TicketCard";
 
 const constructTicketData = props => {
   //define event data obj which contains the ticket to display

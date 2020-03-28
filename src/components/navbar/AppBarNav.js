@@ -150,7 +150,12 @@ export default function PrimarySearchAppBar(props) {
               &nbsp;&nbsp;Profile
             </Link>
           </MenuItem>
-          <MenuItem onClick={props.logOut}>
+          <MenuItem
+            onClick={() => {
+              props.logOut();
+              handleMenuClose();
+            }}
+          >
             <ExitToAppOutlinedIcon />
             &nbsp;&nbsp;Log Out
           </MenuItem>
