@@ -1,6 +1,6 @@
 import React from "react";
 import MaterialTable from "material-table";
-import Container from "@material-ui/core/Container";
+import { Container } from "@material-ui/core/";
 
 export default class TicketTable extends React.Component {
   onChangeEvent = id => {
@@ -14,6 +14,7 @@ export default class TicketTable extends React.Component {
       {
         title: "Event",
         field: "event",
+        editable: "onAdd",
         editComponent: rowData => (
           <select onChange={e => this.onChangeEvent(e.target.value)}>
             <option>Select event</option>
