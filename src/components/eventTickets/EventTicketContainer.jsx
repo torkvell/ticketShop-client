@@ -5,7 +5,6 @@ import TicketTable from "./EventTicketTable";
 import { getEventId } from "../../utils/";
 
 const TicketContainer = props => {
-  console.log(`event ticket contianer props-------->`, props);
   const toTicketDetailPage = ticketId => {
     props.history.push(
       `/ticket?ticketId=${ticketId}&eventId=${getEventId({
