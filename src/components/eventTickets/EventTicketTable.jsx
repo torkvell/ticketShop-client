@@ -59,7 +59,7 @@ const headCells = [
   },
   { id: "price", numeric: true, disablePadding: false, label: "Price" },
   {
-    id: "fraudRating",
+    id: "fraudRisk",
     numeric: true,
     disablePadding: false,
     label: "Fraud rating"
@@ -166,13 +166,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function EnhancedTable(props) {
-  function createData(title, description, price, fraudRating, id) {
-    return { title, description, price, fraudRating, id };
-  }
-
+  //create row data for each ticket
   const rows = props.tickets.map(
     ({ title, description, price, fraudRisk, id }) => {
-      return createData(title, description, price, fraudRisk, id);
+      return { title, description, price, fraudRisk, id };
     }
   );
 
@@ -241,9 +238,8 @@ export default function EnhancedTable(props) {
                   return (
                     <TableRow
                       className={
-                        row.fraudRating > 50 ? classes.red : classes.green
+                        row.fraudRisk > 50 ? classes.red : classes.green
                       }
-                      hover
                       onClick={() => props.toTicketDetailPage(row.id)}
                       tabIndex={-1}
                       key={index}
@@ -258,7 +254,7 @@ export default function EnhancedTable(props) {
                       </TableCell>
                       <TableCell align="left">{row.description}</TableCell>
                       <TableCell align="right">{row.price}</TableCell>
-                      <TableCell align="right">{row.fraudRating}</TableCell>
+                      <TableCell align="right">{row.fraudRisk}</TableCell>
                     </TableRow>
                   );
                 })}
