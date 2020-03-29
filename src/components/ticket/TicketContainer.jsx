@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Container } from "@material-ui/core";
 import { postComment } from "../../redux/user/actions";
 import { addProductToCart } from "../../redux/cart/actions";
-import { getEventId } from "../../utils/";
+import { getEventId, getTicketId } from "../../utils/";
 import TicketCard from "./TicketCard";
 
 const constructTicketData = props => {
@@ -15,7 +15,9 @@ const constructTicketData = props => {
     currentEvent => currentEvent.id === eventIdUrl
   );
   //define ticket data obj from tickets array in event data obj
-  const ticketIdUrl = parseInt(props.location.pathname.slice(-1));
+  const ticketIdUrl = getTicketId({
+    queryString: props.location.search
+  });
   const ticketData = eventWithTicket.tickets.find(
     currentTicket => currentTicket.id === ticketIdUrl
   );
@@ -53,7 +55,7 @@ export class TicketContainer extends Component {
     const prevTicketData = constructTicketData(prevProps);
     const newTicketData = constructTicketData(this.props);
     if (newTicketData.comments.length !== prevTicketData.comments.length) {
-      this.setState({ ticketData: constructTicketData(this.props) });
+      this.setState({ ticketData: newTicketData });
     }
   }
 

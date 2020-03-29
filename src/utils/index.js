@@ -7,3 +7,11 @@ export const getEventId = ({ queryString }) => {
     }).eventId
   );
 };
+
+export const getTicketId = ({ queryString }) => {
+  return parseInt(
+    qs.parse(queryString, {
+      ignoreQueryPrefix: true
+    }).ticketId
+  );
+};
