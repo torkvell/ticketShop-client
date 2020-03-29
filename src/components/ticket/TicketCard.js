@@ -20,9 +20,6 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    maxWidth: 800
-  },
   media: {
     height: 0,
     paddingTop: "56.25%" // 16:9
@@ -39,6 +36,15 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  priceTag: {
+    color: "green",
+    fontWeight: "bold",
+    marginLeft: "50px"
+  },
+  fraudRisk: {
+    color: "red",
+    fontWeight: "bold"
   }
 }));
 
@@ -55,7 +61,7 @@ export default function TicketCard(props) {
   const ticketEndTime = props.event.endDate.substr(11, 5);
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardHeader
         avatar={
           <Avatar
@@ -83,8 +89,12 @@ export default function TicketCard(props) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <Typography>Fraud risk: {props.ticketData.fraudRisk}</Typography>
-        <Typography>Price: {props.ticketData.price}</Typography>
+        <Typography className={classes.fraudRisk}>
+          FR {props.ticketData.fraudRisk}%
+        </Typography>
+        <Typography className={classes.priceTag}>
+          $ {props.ticketData.price}
+        </Typography>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
