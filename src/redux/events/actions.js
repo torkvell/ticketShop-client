@@ -1,6 +1,6 @@
 import axios from "axios";
-// const serverUrl = "https://ticket-shop-server.herokuapp.com";
-const serverUrl = "http://localhost:4000";
+const serverUrl = "https://ticket-shop-server.herokuapp.com";
+// const serverUrl = "http://localhost:4000";
 
 export function getAllEventData() {
   return async function(dispatch) {
