@@ -51,6 +51,7 @@ class EventContainer extends Component {
             paginate={this.paginate}
           ></Paginator>
         </Grid>
+        {console.log(`event props`, this.props.events)}
       </Container>
     );
   }

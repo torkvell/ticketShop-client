@@ -15,3 +15,9 @@ export const getTicketId = ({ queryString }) => {
     }).ticketId
   );
 };
+
+export const findEvent = (state, eventId) =>
+  state.find(event => event.id === eventId);
+
+export const filterOutEvent = (state, eventId) =>
+  state.filter(event => event.id !== eventId);
