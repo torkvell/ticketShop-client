@@ -8,7 +8,7 @@ import EventContainer from "./components/events/EventContainer";
 import EventTicketContainer from "./components/eventTickets/EventTicketContainer";
 import TicketContainer from "./components/ticket/TicketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
-import MyTicketContainer from "./components/user/myTickets/MyTicketContainer";
+import MyTicketContainer from "./components/user/mytickets/MyticketContainer";
 import Cart from "./components/cart/";
 import { getAllEventData } from "./redux/events/actions";
 import "./App.css";
