@@ -1,5 +1,5 @@
 import axios from "axios";
-const serverUl = "https://ticket-shop-server.herokuapp.com";
+const serverUrl = "https://ticket-shop-server.herokuapp.com";
 
 /*--------------------SIGN UP--------------------*/
 
