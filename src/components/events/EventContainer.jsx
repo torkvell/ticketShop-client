@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Grid } from "@material-ui/core";
 import { connect } from "react-redux";
-import EventCard from "./EventCard.js";
+import EventCard from "./EventCard";
 import Paginator from "./Paginator";
 
 class EventContainer extends Component {
