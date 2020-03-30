@@ -7,7 +7,7 @@ import SignUpContainer from "./components/user/signup/SignUpContainer";
 import EventContainer from "./components/events/EventContainer";
 import EventTicketContainer from "./components/eventTickets/EventTicketContainer";
 import TicketContainer from "./components/ticket/TicketContainer";
-import MyTicketContainer from "./components/user/myTickets/MyticketContainer";
+import MyTicketContainer from "./components/user/myTickets/MyTicketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
 import Cart from "./components/cart/";
 import { getAllEventData } from "./redux/events/actions";
