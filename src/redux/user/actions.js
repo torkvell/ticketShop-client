@@ -1,11 +1,12 @@
 import axios from "axios";
+const serverUl = "https://ticket-shop-server.herokuapp.com";
 
 /*--------------------SIGN UP--------------------*/
 
 export function signUp(firstName, lastName, email, password) {
   return async function(dispatch) {
     try {
-      const response = await axios.post("http://localhost:4000/user/signup", {
+      const response = await axios.post(`${serverUrl}/user/signup`, {
         firstName,
         lastName,
         email,
@@ -40,7 +41,7 @@ function signUpSuccess(data) {
 export function logIn(email, password) {
   return async function(dispatch, getState) {
     try {
-      const response = await axios.post("http://localhost:4000/user/login", {
+      const response = await axios.post(`${serverUrl}/user/login`, {
         email,
         password
       });
@@ -88,9 +89,7 @@ function logOutSuccess() {
 export function getMyTickets(userId) {
   return async function(dispatch) {
     try {
-      const response = await axios.get(
-        `http://localhost:4000/user/${userId}/ticket`
-      );
+      const response = await axios.get(`${serverUrl}/${userId}/ticket`);
       // Success 🎉
       dispatch(updateUserTickets(response.data));
       dispatch(errorHandler(null));
@@ -126,7 +125,7 @@ export function createTicket(
   return async function(dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:4000/ticket/`,
+        `${serverUrl}/ticket/`,
         {
           title,
           description,
@@ -163,10 +162,9 @@ function ticketCreated(data) {
 export function deleteTicket(ticketId, token) {
   return async function(dispatch) {
     try {
-      const response = await axios.delete(
-        `http://localhost:4000/ticket/${ticketId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await axios.delete(`${serverUrl}/ticket/${ticketId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       // Success 🎉
       dispatch(ticketDeleted(response.data));
       dispatch(errorHandler(null));
@@ -203,7 +201,7 @@ export function updateTicket(
   return async function(dispatch) {
     try {
       const response = await axios.put(
-        `http://localhost:4000/ticket/${ticketId}`,
+        `${serverUrl}/ticket/${ticketId}`,
         {
           title,
           description,
@@ -242,9 +240,7 @@ function ticketUpdated(data) {
 export function getMyEvents(userId) {
   return async function(dispatch) {
     try {
-      const response = await axios.get(
-        `http://localhost:4000/user/${userId}/event`
-      );
+      const response = await axios.get(`${serverUrl}/user/${userId}/event`);
       // Success 🎉
       dispatch(updateUserEvents(response.data));
       dispatch(errorHandler(null));
@@ -280,7 +276,7 @@ export function createEvent(
   return async function(dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:4000/event/`,
+        `${serverUrl}/event/`,
         {
           name,
           imageUrl,
@@ -317,10 +313,9 @@ function eventCreated(data) {
 export function deleteEvent(eventId, token) {
   return async function(dispatch) {
     try {
-      const response = await axios.delete(
-        `http://localhost:4000/event/${eventId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await axios.delete(`${serverUrl}/event/${eventId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       // Success 🎉
       dispatch(eventDeleted(response.data));
       dispatch(errorHandler(null));
@@ -351,7 +346,7 @@ export function postComment(comment, ticketId, userId, token) {
   return async function(dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:4000/comment/${ticketId}`,
+        `${serverUrl}/comment/${ticketId}`,
         { comment, ticketId, userId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
