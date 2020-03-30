@@ -9,12 +9,12 @@ export default class Cart extends Component {
         <td> {this.props.productName}</td>
         <td>
           <i
-            class="arrow left"
+            className="arrow left"
             onClick={() => this.props.updateQuantity(productId, "decrease")}
           ></i>
           {this.props.productQuantity}
           <i
-            class="arrow right"
+            className="arrow right"
             onClick={() => this.props.updateQuantity(productId, "increase")}
           ></i>
         </td>
