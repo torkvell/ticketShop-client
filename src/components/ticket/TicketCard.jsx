@@ -118,6 +118,7 @@ export default function TicketCard(props) {
       </CardActions>
       <CardActions disableSpacing>
         <Button
+          href="/cart"
           color="primary"
           variant="contained"
           fullWidth
