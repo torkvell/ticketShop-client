@@ -38,12 +38,15 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500]
   },
   priceTag: {
-    color: "green",
     fontWeight: "bold",
     marginLeft: "50px"
   },
-  fraudRisk: {
+  fraudRiskRed: {
     color: "red",
+    fontWeight: "bold"
+  },
+  fraudRiskGreen: {
+    color: "green",
     fontWeight: "bold"
   }
 }));
@@ -89,11 +92,18 @@ export default function TicketCard(props) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <Typography className={classes.fraudRisk}>
+
+        <Typography
+          className={
+            props.ticketData.fraudRisk > 50
+              ? classes.fraudRiskRed
+              : classes.fraudRiskGreen
+          }
+        >
           FR {props.ticketData.fraudRisk}%
         </Typography>
         <Typography className={classes.priceTag}>
-          $ {props.ticketData.price}
+          € {props.ticketData.price}
         </Typography>
         <IconButton
           className={clsx(classes.expand, {
