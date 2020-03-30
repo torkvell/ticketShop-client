@@ -89,7 +89,7 @@ function logOutSuccess() {
 export function getMyTickets(userId) {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`${serverUrl}/${userId}/ticket`);
+      const response = await axios.get(`${serverUrl}/user/${userId}/ticket`);
       // Success 🎉
       dispatch(updateUserTickets(response.data));
       dispatch(errorHandler(null));
