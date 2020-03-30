@@ -2,7 +2,9 @@ import axios from "axios";
 
 export function getAllEventData() {
   return async function(dispatch) {
-    const response = await axios.get("http://localhost:4000/event");
+    const response = await axios.get(
+      "https://ticket-shop-server.herokuapp.com/event"
+    );
     if (!response.data.error) {
       dispatch(eventsFethed(response.data));
     } else {
