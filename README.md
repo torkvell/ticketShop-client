@@ -1,5 +1,8 @@
 # Ticket Shop 
 This project was developed as a final assignment at Codaisseur - Amsterdam. No assistance from teachers or fellow students was allowed. This to do a final assessment of each students individual skills.
+
+Final result: https://ticket-shop-client.herokuapp.com/
+
 # Assignment
 You're going to build a full stack web-application where users can buy and sell tickets for all kinds of events.
 ## Description
