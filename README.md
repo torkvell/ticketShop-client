@@ -1,7 +1,5 @@
 # Ticket Shop 
-***
-This project was developed as a final assignment at Codaisseur - Amsterdam. No assistance from teachers or fellow students was allowed. This to do a final assesment of each students individual skills.
-***
+This project was developed as a final assignment at Codaisseur - Amsterdam. No assistance from teachers or fellow students was allowed. This to do a final assessment of each students individual skills.
 # Assignment
 You're going to build a full stack web-application where users can buy and sell tickets for all kinds of events.
 ## Description
@@ -45,8 +43,3 @@ The calculated risk of a ticket depends on many factors. Make sure that the risk
 * As an author of the ticket I want to be able to edit a ticket's description, price and picture (other logged in customers cannot do this! only the user that created the ticket can edit it)
 * As a logged in customer I want to be able to create events with a name, picture (logo), date and description
 * As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
-## Tools and technology
-We recommend to use starter kits that we provided during the program to start this app.
-In terms of backend (server) technology, you can work with any NodeJS backend: JavaScript or Typescript, Express, or routing-controllers. It's up to you. The API should follow the better part of the REST principles. 
-For the frontend, we expect you to properly use React and Redux. Make sure you use the Redux store to your advantage! Use either create-react-app or one of the starter kits that you've used before. 
-Feel free to add any packages that you like. E.g. [MaterialUI](https://material-ui.com) can be used to set up a nice layout (maybe even responsive!) but there are perfect alternatives as well.
