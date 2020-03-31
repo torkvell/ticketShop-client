@@ -379,3 +379,11 @@ function newTicketComment(data) {
 function errorHandler(data) {
   return { type: "ERROR", payload: data };
 }
+
+/*--------------------ACCOUNT CREATION--------------------*/
+
+export function resetAccountCreation() {
+  return async function(dispatch) {
+    dispatch({ type: "RESET_ACCOUNT_CREATION" });
+  };
+}

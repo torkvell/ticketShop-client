@@ -4,7 +4,8 @@ const initialState = {
   token: null,
   tickets: null,
   events: null,
-  error: null
+  error: null,
+  accountCreated: false
 };
 
 export default (state = initialState, action = {}) => {
@@ -77,6 +78,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         tickets: newTicketArray
+      };
+    case "RESET_ACCOUNT_CREATION":
+      return {
+        ...state,
+        accountCreated: false
       };
     default:
       return state;

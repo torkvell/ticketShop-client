@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SignUpForm from "./SignUpForm";
-import { signUp } from "../../../redux/user/actions.js";
+import { signUp, resetAccountCreation } from "../../../redux/user/actions.js";
 
 class SignUpContainer extends Component {
   state = {
@@ -34,9 +34,9 @@ class SignUpContainer extends Component {
 
   render() {
     if (this.props.user.accountCreated) {
-      //TODO: Redirect to user's home page to confirm login
       setTimeout(() => {
         this.props.history.push("/login");
+        this.props.resetAccountCreation();
       }, 2500);
       return (
         <h3>
@@ -64,4 +64,6 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { signUp })(SignUpContainer);
+export default connect(mapStateToProps, { signUp, resetAccountCreation })(
+  SignUpContainer
+);
