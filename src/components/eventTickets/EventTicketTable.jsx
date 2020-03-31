@@ -15,7 +15,8 @@ import {
   Typography,
   Paper,
   FormControlLabel,
-  Switch
+  Switch,
+  CircularProgress
 } from "@material-ui/core";
 
 function descendingComparator(a, b, orderBy) {
@@ -165,7 +166,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function EnhancedTable(props) {
+export default function EventTicketTable(props) {
   //create row data for each ticket
   const rows = props.tickets.map(
     ({ title, description, price, fraudRisk, id }) => {
@@ -179,7 +180,7 @@ export default function EnhancedTable(props) {
   const [setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -238,7 +239,9 @@ export default function EnhancedTable(props) {
                   return (
                     <TableRow
                       className={
-                        row.fraudRisk > 50 ? classes.red : classes.green
+                        row.fraudRisk > 50 || !row.fraudRisk
+                          ? classes.red
+                          : classes.green
                       }
                       onClick={() => props.toTicketDetailPage(row.id)}
                       tabIndex={-1}
@@ -254,7 +257,17 @@ export default function EnhancedTable(props) {
                       </TableCell>
                       <TableCell align="left">{row.description}</TableCell>
                       <TableCell align="right">{row.price}</TableCell>
-                      <TableCell align="right">{row.fraudRisk}</TableCell>
+                      <TableCell align="right">
+                        {!row.fraudRisk ? (
+                          <CircularProgress
+                            color="secondary"
+                            size={18}
+                            thickness={4}
+                          />
+                        ) : (
+                          row.fraudRisk
+                        )}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
