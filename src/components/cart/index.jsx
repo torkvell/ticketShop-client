@@ -21,7 +21,7 @@ import "./cart.css";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 450
+    minWidth: 550
   }
 });
 
