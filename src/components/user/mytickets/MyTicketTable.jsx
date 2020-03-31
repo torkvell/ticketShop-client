@@ -1,11 +1,12 @@
-import React from "react";
-import MaterialTable from "material-table";
-import { Container } from "@material-ui/core/";
+import React from "./node_modules/react";
+import MaterialTable from "./node_modules/material-table";
+import { Container } from "./node_modules/@material-ui/core/";
 
 export default class TicketTable extends React.Component {
   onChangeEvent = id => {
     this.setState({ eventId: id });
   };
+
   state = {
     columns: [
       { title: "ID", field: "id", editable: "never" },
