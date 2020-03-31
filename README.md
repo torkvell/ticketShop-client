@@ -17,7 +17,6 @@ A ticket is made for a specific event and has an author (the user that created t
 When you click on a ticket, you see the details of that ticket (description/price) and which event it's for. On this page you can add comments as a customer, and everybody can see all the comments.
 A comment has a text and is connected to a specific ticket. It also has an author. 
 Anybody can view events and tickets, but you have to login to add a new ticket or comment. 
-![Mockup of some pages of the app](https://cd.sseu.re/final-assignment-mockup.png)
 ## !! Fraud risk algorithm !!
 _This is an important part of the assignment. If you only finish one thing, it should be this thing!_
 Tickets can be fraudulent, and as a customer I don't want to buy a fake ticket! So, we want to show customers the risk that they are taking when buying the ticket. 
@@ -43,3 +42,5 @@ The calculated risk of a ticket depends on many factors. Make sure that the risk
 * As an author of the ticket I want to be able to edit a ticket's description, price and picture (other logged in customers cannot do this! only the user that created the ticket can edit it)
 * As a logged in customer I want to be able to create events with a name, picture (logo), date and description
 * As a customer I can see some color (red/yellow/green) indicating the fraud risk of a ticket for all tickets in the all tickets list
+## Mockup
+![Mockup of some pages of the app](https://cd.sseu.re/final-assignment-mockup.png)
