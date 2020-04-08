@@ -49,7 +49,7 @@
   "devDependencies": {
     "json-server": "^0.15.1"
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "Ticket shop for selling and buying tickets",
   "main": "index.js",
   "repository": {
     "type": "git",
