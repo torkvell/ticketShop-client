@@ -146,7 +146,7 @@ export default function SignUp(props) {
               <div></div>
             )}
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link to={process.env.PUBLIC_URL + '/login'} variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

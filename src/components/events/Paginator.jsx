@@ -11,7 +11,6 @@ export default function Paginator(props) {
   ) {
     pageNumbers.push(i);
   }
-  // console.log("pagenumbers", pageNumbers);
   return (
     <Pagination
       color="primary"

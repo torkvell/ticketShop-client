@@ -146,7 +146,7 @@ export default function PrimarySearchAppBar(props) {
         <div>
           <MenuItem onClick={handleMenuClose}>
             <PermIdentityOutlinedIcon></PermIdentityOutlinedIcon>
-            <Link className={classes.navLinkBlack} to="/profile">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/profile`}>
               &nbsp;&nbsp;Profile
             </Link>
           </MenuItem>
@@ -164,13 +164,13 @@ export default function PrimarySearchAppBar(props) {
         <div>
           <MenuItem onClick={handleMenuClose}>
             <VpnKeyIcon />
-            <Link className={classes.navLinkBlack} to="/login">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/login`}>
               &nbsp;&nbsp;Log in
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <PersonAddIcon />
-            <Link className={classes.navLinkBlack} to="/signup">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/cart`}>
               &nbsp;&nbsp;Sign up
             </Link>
           </MenuItem>
@@ -195,19 +195,19 @@ export default function PrimarySearchAppBar(props) {
         <div>
           <MenuItem onClick={handleMenuClose}>
             <PermIdentityOutlinedIcon></PermIdentityOutlinedIcon>
-            <Link className={classes.navLinkBlack} to="/profile">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/profile`}>
               &nbsp;&nbsp;Profile
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <ListAltIcon></ListAltIcon>
-            <Link className={classes.navLinkBlack} to="/mytickets">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/mytickets`}>
               &nbsp;&nbsp;My tickets
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <EventIcon></EventIcon>
-            <Link className={classes.navLinkBlack} to="/myevents">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/myevents`}>
               &nbsp;&nbsp;My Events
             </Link>
           </MenuItem>
@@ -220,13 +220,13 @@ export default function PrimarySearchAppBar(props) {
         <div>
           <MenuItem onClick={handleMenuClose}>
             <VpnKeyIcon />
-            <Link className={classes.navLinkBlack} to="/login">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/login`}>
               &nbsp;&nbsp;Log in
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
             <PersonAddIcon />
-            <Link className={classes.navLinkBlack} to="/signup">
+            <Link className={classes.navLinkBlack} to={`${process.env.PUBLIC_URL}/signup`}>
               &nbsp;&nbsp;Sign up
             </Link>
           </MenuItem>
@@ -239,7 +239,7 @@ export default function PrimarySearchAppBar(props) {
     <div>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Link to="/" className={classes.navLinkWhite}>
+          <Link to="/ticket-shop/" className={classes.navLinkWhite}>
             <IconButton
               edge="start"
               className={classes.menuButton}
@@ -271,13 +271,13 @@ export default function PrimarySearchAppBar(props) {
               <div className={classes.desktopUserActions}>
                 <MenuItem onClick={handleMenuClose}>
                   <ListAltIcon></ListAltIcon>
-                  <Link className={classes.navLinkWhite} to="/mytickets">
+                  <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/mytickets`}>
                     &nbsp;&nbsp;My Tickets
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                   <EventIcon></EventIcon>
-                  <Link className={classes.navLinkWhite} to="/myevents">
+                  <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/myevents`}>
                     &nbsp;&nbsp;My Events
                   </Link>
                 </MenuItem>
@@ -286,19 +286,19 @@ export default function PrimarySearchAppBar(props) {
               <div className={classes.desktopUserActions}>
                 <MenuItem onClick={handleMenuClose}>
                   <VpnKeyIcon />
-                  <Link className={classes.navLinkWhite} to="/login">
+                  <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/login`}>
                     &nbsp;&nbsp;Log in
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                   <PersonAddIcon />
-                  <Link className={classes.navLinkWhite} to="/signup">
+                  <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/signup`}>
                     &nbsp;&nbsp;Sign up
                   </Link>
                 </MenuItem>
               </div>
             )}
-            <Link className={classes.navLinkWhite} to="/cart">
+            <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/cart`}>
               <IconButton aria-label="shopping cart icon" color="inherit">
                 <Badge badgeContent={props.cart.length} color="secondary">
                   <ShoppingCartOutlinedIcon />
@@ -323,7 +323,7 @@ export default function PrimarySearchAppBar(props) {
           <div className={classes.sectionMobile}>
             {props.user.token ? (
               <div className={classes.desktopUserActions}>
-                <Link className={classes.navLinkWhite} to="/cart">
+                <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/cart`}>
                   <IconButton aria-label="shopping cart icon" color="inherit">
                     <Badge badgeContent={props.cart.length} color="secondary">
                       <ShoppingCartOutlinedIcon />
@@ -344,17 +344,17 @@ export default function PrimarySearchAppBar(props) {
               <div className={classes.desktopUserActions}>
                 <MenuItem onClick={handleMenuClose}>
                   <VpnKeyIcon />
-                  <Link className={classes.navLinkWhite} to="/login">
+                  <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/login`}>
                     &nbsp;&nbsp;Log in
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                   <PersonAddIcon />
-                  <Link className={classes.navLinkWhite} to="/signup">
+                  <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/signup`}>
                     &nbsp;&nbsp;Sign up
                   </Link>
                 </MenuItem>
-                <Link className={classes.navLinkWhite} to="/cart">
+                <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/cart`}>
                   <IconButton aria-label="shopping cart icon" color="inherit">
                     <Badge badgeContent={props.cart.length} color="secondary">
                       <ShoppingCartOutlinedIcon />

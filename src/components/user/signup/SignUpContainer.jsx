@@ -35,13 +35,13 @@ class SignUpContainer extends Component {
   render() {
     if (this.props.user.accountCreated) {
       setTimeout(() => {
-        this.props.history.push("/login");
+        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
         this.props.resetAccountCreation();
       }, 2500);
       return (
         <h3>
           You are signed up! Redirecting you to
-          <Link to="/login"> login page</Link>
+          <Link to={`${process.env.PUBLIC_URL}/login`}> login page</Link>
         </h3>
       );
     }

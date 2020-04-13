@@ -22,14 +22,14 @@ class App extends Component {
       <div className="App">
         <NavigationBar />
         <Switch>
-          <Route path="/cart" component={Cart} />
-          <Route path="/login" component={LoginContainer} />
-          <Route path="/signup" component={SignUpContainer} />
-          <Route path="/mytickets" component={MyTicketContainer} />
-          <Route path="/myevents" component={MyEventContainer} />
-          <Route path="/eventTickets/" component={EventTicketContainer} />
-          <Route path="/ticket/" component={TicketContainer} />
-          <Route path="/" exact component={EventContainer} />
+          <Route path={`${process.env.PUBLIC_URL}/`} exact component={EventContainer} />
+          <Route path={`${process.env.PUBLIC_URL}/cart`} component={Cart} />
+          <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginContainer} />
+          <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignUpContainer} />
+          <Route path={`${process.env.PUBLIC_URL}/mytickets`} component={MyTicketContainer} />
+          <Route path={`${process.env.PUBLIC_URL}/myevents`} component={MyEventContainer} />
+          <Route path={`${process.env.PUBLIC_URL}/eventTickets`} component={EventTicketContainer} />
+          <Route path={`${process.env.PUBLIC_URL}/ticket`} component={TicketContainer} />
         </Switch>
       </div>
     );

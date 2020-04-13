@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -48,6 +49,13 @@ const useStyles = makeStyles(theme => ({
   fraudRiskGreen: {
     color: "green",
     fontWeight: "bold"
+  },
+  navLinkWhite: {
+    color: "white",
+    textDecoration: "none !important",
+    "&:hover, &:focus": {
+      color: "white"
+    }
   }
 }));
 
@@ -118,13 +126,14 @@ export default function TicketCard(props) {
       </CardActions>
       <CardActions disableSpacing>
         <Button
-          href="/cart"
           color="primary"
           variant="contained"
           fullWidth
           onClick={() => props.addProductToCart(props.ticketData)}
         >
-          BUY NOW
+        <Link className={classes.navLinkWhite} to={process.env.PUBLIC_URL + '/cart'}>
+        BUY NOW
+        </Link>
         </Button>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>

@@ -27,7 +27,7 @@ class LoginContainer extends Component {
 
   render() {
     if (this.props.user.token) {
-      return <Redirect to="/" />;
+      return <Redirect to={process.env.PUBLIC_URL}/>;
     }
     return (
       <div>

@@ -44,7 +44,7 @@ export default function MediaCard(props) {
             </CardContent>
           </CardActionArea>
           <CardActions className={classes.cardAction}>
-            <Link to={"/eventTickets?eventId=" + event.id}>
+            <Link to={`${process.env.PUBLIC_URL}/eventTickets?eventId=${event.id}`}>
               <Button size="small" color="primary">
                 See all tickets
               </Button>

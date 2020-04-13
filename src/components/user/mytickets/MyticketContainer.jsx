@@ -24,8 +24,6 @@ class MyTicketContainer extends Component {
           ) : (
             <div></div>
           )}
-          <div></div>
-
           <TicketForm {...ticketContainerProps} />
         </Container>
       </div>

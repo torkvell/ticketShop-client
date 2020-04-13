@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -22,7 +23,15 @@ import "./cart.css";
 const useStyles = makeStyles({
   table: {
     minWidth: 550
-  }
+  },
+  navLinkBlack: {
+    color: "black",
+    textDecoration: "none",
+    "&:hover, &:focus": {
+      color: "black",
+      textDecoration: "none"
+    }
+  },
 });
 
 function Cart(props) {
@@ -100,8 +109,10 @@ function Cart(props) {
           Total Price: {calcTotalPrice(props.cart)}
         </h5>
       </TableContainer>
-      <Button className="cartButton" variant="contained" href="/">
+    <Button className="cartButton" variant="contained">
+        <Link className={classes.navLinkBlack} to={process.env.PUBLIC_URL}>
         Continue Shopping
+        </Link>
       </Button>
       <Button className="cartButton" variant="contained" color="primary">
         Checkout

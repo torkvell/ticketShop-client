@@ -6,10 +6,9 @@ import { getEventId } from "../../utils/";
 
 const TicketContainer = props => {
   const toTicketDetailPage = ticketId => {
-    props.history.push(
-      `/ticket?ticketId=${ticketId}&eventId=${getEventId({
-        queryString: props.location.search
-      })}`
+    props.history.push(`${process.env.PUBLIC_URL}/ticket?ticketId=${ticketId}&eventId=${getEventId({
+      queryString: props.location.search
+    })}`
     );
   };
   const eventArray = props.events.filter(

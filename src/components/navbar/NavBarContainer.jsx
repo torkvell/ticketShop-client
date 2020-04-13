@@ -12,7 +12,7 @@ class NavBar extends Component {
         user={this.props.user}
         logOut={() => {
           this.props.logOut();
-          this.props.history.push("/");
+          this.props.history.push(process.env.PUBLIC_URL);
         }}
       />
     );
