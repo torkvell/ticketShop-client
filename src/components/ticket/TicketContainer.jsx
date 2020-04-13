@@ -4,7 +4,8 @@ import { Container } from "@material-ui/core";
 import { postComment } from "../../redux/user/actions";
 import { addProductToCart } from "../../redux/cart/actions";
 import { getEventId, getTicketId } from "../../utils/";
-import TicketCard from "./TicketCard";
+import TicketCardMobile from "./TicketCardMobile";
+import TicketCardDesktop from "./TicketCardDesktop";
 
 const constructTicketData = props => {
   //define event data obj which contains the ticket to display
@@ -24,10 +25,18 @@ const constructTicketData = props => {
   return ticketData;
 };
 
+function getWindowProps() {
+  const {innerWidth: width} = window
+  return {
+    width
+  };
+}
+
 export class TicketContainer extends Component {
   state = {
     ticketData: null,
-    comment: ""
+    comment: "",
+    window: getWindowProps()
   };
 
   handleChange = event => {
@@ -68,18 +77,32 @@ export class TicketContainer extends Component {
         })
     );
     if (this.state.ticketData) {
-      return (
-        <Container>
-          <TicketCard
-            event={eventWithTicket}
-            ticketData={this.state.ticketData}
-            comment={this.state.comment}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            addProductToCart={this.props.addProductToCart}
-          ></TicketCard>
-        </Container>
-      );
+      if(this.state.window.width < 1000){
+        return (
+          <Container>
+            <TicketCardMobile
+              event={eventWithTicket}
+              ticketData={this.state.ticketData}
+              comment={this.state.comment}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              addProductToCart={this.props.addProductToCart}
+            ></TicketCardMobile>
+          </Container>
+        );
+      } else {
+      return (          
+      <Container>
+        <TicketCardDesktop
+          event={eventWithTicket}
+          ticketData={this.state.ticketData}
+          comment={this.state.comment}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          addProductToCart={this.props.addProductToCart}
+        ></TicketCardDesktop>
+      </Container>)
+      }  
     } else {
       return <div>Loading..</div>;
     }
