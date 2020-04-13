@@ -14,7 +14,15 @@ import {
   IconButton,
   Typography,
   Button,
-  TextField
+  TextField,
+  List,
+  Container,
+  ListItem,
+  ListItemAvatar,
+  ImageIcon,
+  ListItemText,
+  Divider,
+  WorkIcon
 } from "@material-ui/core/";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -60,6 +68,31 @@ const useStyles = makeStyles(theme => ({
   },
   fraudTicket: {
     boxShadow: '2px 2px 15px 0px #FF0000'
+  },
+  commentArea: {
+      display: 'flex',
+      flexDirection: 'column',
+      maxWidth: '500px',
+      marginTop: '-150px',
+      marginBottom: '20px'
+  },
+  commentItemHeading:{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+  },
+  commentFormWrapper: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      marginRight: '-15px'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  comment: {
+    minWidth: '380px'
   }
 }));
 
@@ -76,6 +109,7 @@ export default function TicketCard(props) {
   const ticketEndTime = props.event.endDate.substr(11, 5);
 
   return (
+    <div>
     <div className="ticket">
         <div className="ticketContentWrapper">
             <div className="ticketContent">
@@ -139,5 +173,51 @@ export default function TicketCard(props) {
             </div>
         </div>
     </div>
+    <Container className={classes.commentArea}>
+    <h3>Comments</h3>
+    <List className={classes.root}>
+    {props.ticketData.comments.map((comment, index) => {
+            return (
+                <div>
+                    <ListItem key={index}>
+                        <ListItemAvatar>
+                            <Avatar>
+                            </Avatar>
+                        </ListItemAvatar>
+                        <div className={classes.row}>
+                            <ListItemText className={classes.commentItemHeading} primary="Vacation" secondary="July 20, 2014" />
+                            <div className={classes.comment}>{comment.comment}</div>
+                        </div>
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                </div>
+            )
+          })}
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+          </Avatar>
+      </ListItemAvatar>
+        <div className={classes.commentFormWrapper}>
+            <ListItemText className={classes.commentItemHeading} primary="Vacation" secondary="July 20, 2014" />
+            <form onSubmit={props.handleSubmit}>
+            <TextField
+                id="outlined-basic"
+                label="Comment"
+                variant="outlined"
+                fullWidth
+                name="comment"
+                value={props.comment}
+                onChange={props.handleChange}
+            />
+            </form>
+        </div>
+      </ListItem>
+      <Button type="submit" color="primary" variant="contained" fullWidth>
+        Comment
+      </Button>
+    </List>
+    </Container>
+</div>
   );
 }
