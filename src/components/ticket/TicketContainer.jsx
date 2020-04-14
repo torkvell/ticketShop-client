@@ -51,6 +51,7 @@ export class TicketContainer extends Component {
     event.preventDefault();
     if (!this.props.user.token) {
       alert("You must be logged in to post comments");
+      return;
     }
     this.props.postComment(comment, ticketData.id, userId, token);
     this.setState({ comment: "" });
