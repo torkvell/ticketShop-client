@@ -19,7 +19,7 @@
       #fbfbfb 50%,
       #fbfbfb 100%
     )
-    0px -8px / 16px 17px repeat-x;
+    0px -8px / 15px 17px repeat-x;
   content: "";
   position: absolute;
   left: 5px;
@@ -40,7 +40,7 @@
       #fbfbfb 50%,
       #fbfbfb 100%
     )
-    0px -2px / 16px 17px repeat-x;
+    0px -2px / 17px 17px repeat-x
 }
 
 .ticketContentWrapper {
