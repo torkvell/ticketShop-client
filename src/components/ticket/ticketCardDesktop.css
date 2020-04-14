@@ -1,66 +1,79 @@
 .ticket {
-    position: relative;
-    box-sizing: border-box;
-    width: 300px;
-    height: 700px;
-    margin: -150px auto 0;
-    padding: 20px;
-    border-radius: 5px;
-    background: #FBFBFB;
-    box-shadow: 2px 2px 15px 0px #3f51b5;
-    transform: translate(-25px, 25px) rotate(90deg) ;
+  position: relative;
+  box-sizing: border-box;
+  width: 400px;
+  height: 900px;
+  margin: -220px auto 0;
+  padding: 20px;
+  border-radius: 5px;
+  background: #fbfbfb;
+  box-shadow: 2px 2px 15px 0px #3f51b5;
+  transform: translate(-25px, 25px) rotate(90deg);
 }
 .ticket:before {
-      top: -5px;
-      background: radial-gradient(circle, transparent, transparent 50%, #FBFBFB 50%, #FBFBFB 100% ) 0px -8px / 16px 17px repeat-x;
-      content: '';
-      position: absolute;
-      left: 5px;
-      height: 6px;
-      width: -webkit-fill-available;
-    }
-.ticket:after{
-    content: '';
-    position: absolute;
-    left: 5px;
-    height: 6px;
-    width: -webkit-fill-available;
-    bottom: -5px;
-    background: radial-gradient(circle, transparent, transparent 50%, #FBFBFB 50%, #FBFBFB 100% ) 0px -2px / 16px 17px repeat-x;
+  top: -5px;
+  background: radial-gradient(
+      circle,
+      transparent,
+      transparent 50%,
+      #fbfbfb 50%,
+      #fbfbfb 100%
+    )
+    0px -8px / 16px 17px repeat-x;
+  content: "";
+  position: absolute;
+  left: 5px;
+  height: 6px;
+  width: -webkit-fill-available;
 }
-  
-  .ticketContentWrapper {
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-    border: 6px solid #D8D8D8;
-  }
+.ticket:after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  height: 6px;
+  width: -webkit-fill-available;
+  bottom: -5px;
+  background: radial-gradient(
+      circle,
+      transparent,
+      transparent 50%,
+      #fbfbfb 50%,
+      #fbfbfb 100%
+    )
+    0px -2px / 16px 17px repeat-x;
+}
 
-  .ticketHeader{
-    margin-top: 400px;
-    transform: translate(-25px, 25px) rotate(270deg);
-    margin-left: 50px;
-  }
+.ticketContentWrapper {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  border: 6px solid #d8d8d8;
+}
 
-  .ticketContent{
-    display: flex;
-    flex-direction: row;
-    margin-top: 400px;
-    transform: translate(-25px, 25px) rotate(270deg);
-    margin-left: 50px;
-  }
+.ticketHeader {
+  margin-top: 400px;
+  transform: translate(-25px, 25px) rotate(270deg);
+  margin-left: 50px;
+}
 
-  .ticketPicture{
-    min-width: 300px;
-    min-height: 248px;
-    max-width: 300px;
-    max-height: 248px;
-    margin-top: 35px;
-    margin-left: 35px;
-  }
+.ticketContent {
+  display: flex;
+  flex-direction: row;
+  margin-top: 400px;
+  transform: translate(-25px, 25px) rotate(270deg);
+  margin-left: 50px;
+}
 
-  .ticketInfo{
-    min-width: max-content;
-    min-height: -webkit-fill-available;
-    margin-top: 10px;
-  }
+.ticketPicture {
+  min-width: 450px;
+  min-height: 350px;
+  max-height: 350px;
+  margin-top: 99px;
+}
+
+.ticketInfo {
+  min-width: max-content;
+  min-height: -webkit-fill-available;
+  margin-top: 100px;
+  margin-left: 25px;
+}
