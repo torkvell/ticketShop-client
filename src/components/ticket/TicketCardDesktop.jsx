@@ -112,6 +112,7 @@ export default function TicketCard(props) {
   const ticketEndTime = props.event.endDate.substr(11, 5);
 
   const getSeverityRatingTicket = (fraudRisk) => {
+    if (fraudRisk === null) return "warning";
     if (fraudRisk >= 50) {
       return "error";
     } else if (fraudRisk > 25 && fraudRisk < 50) {
@@ -223,7 +224,7 @@ export default function TicketCard(props) {
             <div className={classes.commentFormWrapper}>
               <ListItemText
                 className={classes.commentItemHeading}
-                primary="Vacation"
+                primary={`${props.user.firstName} ${props.user.lastName}`}
                 secondary={moment(Date.now()).format("MMM Do YYYY")}
               />
               <TextField
