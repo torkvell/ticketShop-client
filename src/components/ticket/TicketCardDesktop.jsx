@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ticketCardDesktop.css";
@@ -24,7 +23,7 @@ import Alert from "@material-ui/lab/Alert";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -71,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     maxWidth: "500px",
-    marginTop: "-180px",
+    marginTop: "-200px",
     marginBottom: "20px",
   },
   commentItemHeading: {
@@ -195,26 +194,28 @@ export default function TicketCard(props) {
       <Container className={classes.commentArea}>
         <h3>Comments</h3>
         <List className={classes.root}>
-          {props.ticketData.comments.map((comment, index) => {
-            return (
-              <div>
-                <ListItem key={index}>
-                  <ListItemAvatar>
-                    <Avatar></Avatar>
-                  </ListItemAvatar>
-                  <div className={classes.row}>
-                    <ListItemText
-                      className={classes.commentItemHeading}
-                      primary="Vacation"
-                      secondary="July 20, 2014"
-                    />
-                    <div className={classes.comment}>{comment.comment}</div>
-                  </div>
-                </ListItem>
-                <Divider variant="inset" component="li" />
-              </div>
-            );
-          })}
+          {props.ticketData.comments &&
+            props.ticketData.comments.map((comment, index) => {
+              const createdAt = moment(comment.createdAt).format("MMM Do YYYY");
+              return (
+                <div>
+                  <ListItem key={index}>
+                    <ListItemAvatar>
+                      <Avatar></Avatar>
+                    </ListItemAvatar>
+                    <div className={classes.row}>
+                      <ListItemText
+                        className={classes.commentItemHeading}
+                        primary={comment.publisher}
+                        secondary={createdAt}
+                      />
+                      <div className={classes.comment}>{comment.comment}</div>
+                    </div>
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </div>
+              );
+            })}
           <ListItem>
             <ListItemAvatar>
               <Avatar></Avatar>
@@ -223,23 +224,28 @@ export default function TicketCard(props) {
               <ListItemText
                 className={classes.commentItemHeading}
                 primary="Vacation"
-                secondary="July 20, 2014"
+                secondary={moment(Date.now()).format("MMM Do YYYY")}
               />
-              <form onSubmit={props.handleSubmit}>
-                <TextField
-                  id="outlined-basic"
-                  label="Comment"
-                  variant="outlined"
-                  fullWidth
-                  name="comment"
-                  value={props.comment}
-                  onChange={props.handleChange}
-                />
-              </form>
+              <TextField
+                id="outlined-basic"
+                label="Comment"
+                variant="outlined"
+                fullWidth
+                name="comment"
+                value={props.comment}
+                onChange={props.handleChange}
+              />
             </div>
           </ListItem>
-          <Button type="submit" color="primary" variant="contained" fullWidth>
-            Comment
+          <Typography>{props.user.error && props.user.error}</Typography>
+          <Button
+            type="submit"
+            onClick={props.handleSubmit}
+            color="primary"
+            variant="contained"
+            fullWidth
+          >
+            {props.user.token ? "Comment" : "You must be logged in to comment"}
           </Button>
         </List>
       </Container>
