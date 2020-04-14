@@ -224,7 +224,9 @@ export default function TicketCard(props) {
             <div className={classes.commentFormWrapper}>
               <ListItemText
                 className={classes.commentItemHeading}
-                primary={`${props.user.firstName} ${props.user.lastName}`}
+                primary={`${
+                  props.user.firstName ? props.user.firstName : "Your name"
+                } ${props.user.lastName ? props.user.lastName : "here"}`}
                 secondary={moment(Date.now()).format("MMM Do YYYY")}
               />
               <TextField
