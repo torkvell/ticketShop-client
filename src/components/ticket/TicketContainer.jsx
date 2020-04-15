@@ -25,18 +25,11 @@ const constructTicketData = (props) => {
   return ticketData;
 };
 
-function getWindowProps() {
-  const { innerWidth: width } = window;
-  return {
-    width,
-  };
-}
-
 export class TicketContainer extends Component {
   state = {
     ticketData: null,
     comment: "",
-    window: getWindowProps(),
+    width: window.innerWidth,
   };
 
   handleChange = (event) => {
@@ -57,8 +50,16 @@ export class TicketContainer extends Component {
     this.setState({ comment: "" });
   };
 
+  throttleHandleResize = () => { 
+    setTimeout(this.setState({width: window.innerWidth}), 1000)
+  }
+
   componentDidMount = () => {
     this.setState({ ticketData: constructTicketData(this.props) });
+    window.addEventListener('resize', this.throttleHandleResize)
+    return () => {
+      window.removeEventListener('resize', this.throttleHandleResize)
+    }
   };
 
   componentDidUpdate(prevProps) {
@@ -69,6 +70,17 @@ export class TicketContainer extends Component {
     }
   }
 
+  getSeverityRatingTicket = (fraudRisk) => {
+    if (fraudRisk === null) return "warning";
+    if (fraudRisk >= 50) {
+      return "error";
+    } else if (fraudRisk > 25 && fraudRisk < 50) {
+      return "warning";
+    } else if (fraudRisk <= 25) {
+      return "success";
+    }
+  };
+
   render() {
     const eventWithTicket = this.props.events.find(
       (currentEvent) =>
@@ -78,16 +90,18 @@ export class TicketContainer extends Component {
         })
     );
     if (this.state.ticketData) {
-      if (this.state.window.width < 1000) {
+      if (this.state.width < 1000) {
         return (
           <Container>
             <TicketCardMobile
               event={eventWithTicket}
               ticketData={this.state.ticketData}
+              user={this.props.user}
               comment={this.state.comment}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               addProductToCart={this.props.addProductToCart}
+              getSeverityRatingTicket={this.getSeverityRatingTicket}
             ></TicketCardMobile>
           </Container>
         );
@@ -102,6 +116,7 @@ export class TicketContainer extends Component {
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               addProductToCart={this.props.addProductToCart}
+              getSeverityRatingTicket={this.getSeverityRatingTicket}
             ></TicketCardDesktop>
           </Container>
         );

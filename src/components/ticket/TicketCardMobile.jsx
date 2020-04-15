@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -8,17 +7,23 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-  Collapse,
   Avatar,
   IconButton,
   Typography,
   Button,
-  TextField
+  TextField,
+  Container,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Divider,
 } from "@material-ui/core/";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Alert from "@material-ui/lab/Alert";
+import moment from "moment";
 
 const useStyles = makeStyles(theme => ({
   media: {
@@ -40,15 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
   priceTag: {
     fontWeight: "bold",
-    marginLeft: "50px"
-  },
-  fraudRiskRed: {
-    color: "red",
-    fontWeight: "bold"
-  },
-  fraudRiskGreen: {
-    color: "green",
-    fontWeight: "bold"
+    fontSize: "1.5em",
   },
   navLinkWhite: {
     color: "white",
@@ -56,22 +53,32 @@ const useStyles = makeStyles(theme => ({
     "&:hover, &:focus": {
       color: "white"
     }
+  },
+  alertFraudRating: {
+    marginBottom: '7%',
+  },
+  innerComments: {
+    marginLeft: '-15px',
+    marginRight: '-5px',
+    marginBottom: '5%',
+  },
+  commentText: {
+    minWidth: '255px',
+  },
+  actionWrapper: {
+    justifyContent: 'space-between',
   }
 }));
 
 export default function TicketCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-  const ticketStartDate = props.event.startDate.slice(0, 10);
-  const ticketStartTime = props.event.startDate.substr(11, 5);
-  const ticketEndDate = props.event.endDate.slice(0, 10);
-  const ticketEndTime = props.event.endDate.substr(11, 5);
-
+  const ticketStartDate =  moment(props.event.startDate).format('MMMM Do YYYY, h:mm');
+  const ticketEndDate = moment(props.event.endDate).format('MMMM Do YYYY, h:mm');
   return (
+    <div>
+    <Alert className={classes.alertFraudRating} severity={props.getSeverityRatingTicket(props.ticketData.fraudRisk)}>
+    We calculated a fraud rating of {props.ticketData.fraudRisk} %
+  </Alert>
     <Card>
       <CardHeader
         avatar={
@@ -87,41 +94,23 @@ export default function TicketCard(props) {
       <CardMedia className={classes.media} image={props.ticketData.imageUrl} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Start: {ticketStartDate} {ticketStartTime} | End: {ticketEndDate}{" "}
-          {ticketEndTime}
+          Start: {ticketStartDate}
+          <br></br>
+          End: {ticketEndDate}
+          <br></br>
           <br></br>
           {props.ticketData.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing className={classes.actionWrapper}>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-
-        <Typography
-          className={
-            props.ticketData.fraudRisk > 50
-              ? classes.fraudRiskRed
-              : classes.fraudRiskGreen
-          }
-        >
-          FR {props.ticketData.fraudRisk}%
-        </Typography>
         <Typography className={classes.priceTag}>
           € {props.ticketData.price}
         </Typography>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
+        <IconButton aria-label="share">
+          <ShareIcon />
         </IconButton>
       </CardActions>
       <CardActions disableSpacing>
@@ -136,27 +125,68 @@ export default function TicketCard(props) {
         </Link>
         </Button>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          {props.ticketData.comments.map((comment, index) => {
-            return <Typography key={index}>{comment.comment}</Typography>;
-          })}
-          <form onSubmit={props.handleSubmit}>
-            <TextField
-              id="outlined-basic"
-              label="Comment"
-              variant="outlined"
-              fullWidth
-              name="comment"
-              value={props.comment}
-              onChange={props.handleChange}
-            />
-            <Button type="submit" color="primary" variant="contained" fullWidth>
-              Comment
-            </Button>
-          </form>
-        </CardContent>
-      </Collapse>
     </Card>
+    <Container className={classes.commentArea}>
+        <h3>Comments</h3>
+        <List className={classes.root, classes.innerComments}>
+          {props.ticketData.comments &&
+            props.ticketData.comments.map((comment, index) => {
+              const createdAt = moment(comment.createdAt).format("MMM Do YYYY");
+              return (
+                <div key={index}>
+                  <ListItem key={index}>
+                    <ListItemAvatar>
+                      <Avatar></Avatar>
+                    </ListItemAvatar>
+                    <div className={classes.row}>
+                      <ListItemText
+                        className={classes.commentItemHeading}
+                        primary={comment.publisher}
+                        secondary={createdAt}
+                      />
+                      <div className={classes.comment}>{comment.comment}</div>
+                    </div>
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </div>
+              );
+            })}
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar></Avatar>
+            </ListItemAvatar>
+            <div className={classes.commentFormWrapper}>
+              <ListItemText
+                className={classes.commentItemHeading}
+                primary={`${
+                  props.user.firstName ? props.user.firstName : "Your name"
+                } ${props.user.lastName ? props.user.lastName : "here"}`}
+                secondary={moment(Date.now()).format("MMM Do YYYY")}
+              />
+              <TextField
+                className={classes.commentText}
+                id="outlined-basic"
+                label="Comment"
+                variant="outlined"
+                fullWidth
+                name="comment"
+                value={props.comment}
+                onChange={props.handleChange}
+              />
+            </div>
+          </ListItem>
+          <Typography>{props.user.error && props.user.error}</Typography>
+          <Button
+            type="submit"
+            onClick={props.handleSubmit}
+            color="primary"
+            variant="contained"
+            fullWidth
+          >
+            {props.user.token ? "Comment" : "You must be logged in to comment"}
+          </Button>
+        </List>
+      </Container>
+    </div>
   );
 }

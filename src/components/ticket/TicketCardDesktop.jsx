@@ -101,31 +101,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TicketCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-  const ticketStartDate = props.event.startDate.slice(0, 10);
-  const ticketStartTime = props.event.startDate.substr(11, 5);
-  const ticketEndDate = props.event.endDate.slice(0, 10);
-  const ticketEndTime = props.event.endDate.substr(11, 5);
-
-  const getSeverityRatingTicket = (fraudRisk) => {
-    if (fraudRisk === null) return "warning";
-    if (fraudRisk >= 50) {
-      return "error";
-    } else if (fraudRisk > 25 && fraudRisk < 50) {
-      return "warning";
-    } else if (fraudRisk <= 25) {
-      return "success";
-    }
-  };
+  const ticketStartDate =  moment(props.event.startDate).format('MMMM Do YYYY, h:mm');
+  const ticketEndDate = moment(props.event.endDate).format('MMMM Do YYYY, h:mm');
 
   return (
     <div>
-      <Alert severity={getSeverityRatingTicket(props.ticketData.fraudRisk)}>
-        We calculated a fraud rating of {props.ticketData.fraudRisk}%
+      <Alert severity={props.getSeverityRatingTicket(props.ticketData.fraudRisk)}>
+        We calculated a fraud rating of {props.ticketData.fraudRisk} %
       </Alert>
       <div className="ticket">
         <div className="ticketContentWrapper">
@@ -153,8 +135,9 @@ export default function TicketCard(props) {
                   component="p"
                   className={classes.cardActionDescription}
                 >
-                  Start: {ticketStartDate} {ticketStartTime} | End:{" "}
-                  {ticketEndDate} {ticketEndTime}
+                  Start: {ticketStartDate}
+                  <br></br>
+                  End: {ticketEndDate}
                   <br></br>
                   <br></br>
                   {props.ticketData.description}
@@ -199,7 +182,7 @@ export default function TicketCard(props) {
             props.ticketData.comments.map((comment, index) => {
               const createdAt = moment(comment.createdAt).format("MMM Do YYYY");
               return (
-                <div>
+                <div key={index}>
                   <ListItem key={index}>
                     <ListItemAvatar>
                       <Avatar></Avatar>
