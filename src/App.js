@@ -10,6 +10,7 @@ import TicketContainer from "./components/ticket/TicketContainer";
 import MyEventContainer from "./components/user/myEvents/MyEventContainer";
 import MyTicketContainer from "./components/user/mytickets/MyticketContainer";
 import Cart from "./components/cart/";
+import Checkout from "./components/checkout/";
 import { getAllEventData } from "./redux/events/actions";
 import "./App.css";
 
@@ -24,6 +25,7 @@ class App extends Component {
         <Switch>
           <Route path={`${process.env.PUBLIC_URL}/`} exact component={EventContainer} />
           <Route path={`${process.env.PUBLIC_URL}/cart`} component={Cart} />
+          <Route path={`${process.env.PUBLIC_URL}/checkout`} component={Checkout} />
           <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginContainer} />
           <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignUpContainer} />
           <Route path={`${process.env.PUBLIC_URL}/mytickets`} component={MyTicketContainer} />

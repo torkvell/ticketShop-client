@@ -1,0 +1,33 @@
+/*Arrow up/dowm*/
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 6px;
+  margin: 0px 8px 0px 8px;
+  cursor: pointer;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.cartButton {
+  min-width: 50% !important;
+}
+
+@media only screen and (max-width: 400px) {
+  .cartButton {
+    min-width: 64px !important;
+  }
+}
+
+.totalPrice {
+  margin: 20px 0px 20px 0px;
+}
