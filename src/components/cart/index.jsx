@@ -32,6 +32,14 @@ const useStyles = makeStyles({
       textDecoration: "none"
     }
   },
+  navLinkWhite: {
+    color: "white",
+    textDecoration: "none",
+    "&:hover, &:focus": {
+      color: "white",
+      textDecoration: "none"
+    }
+  }
 });
 
 function Cart(props) {
@@ -115,7 +123,9 @@ function Cart(props) {
         </Link>
       </Button>
       <Button className="cartButton" variant="contained" color="primary">
+      <Link className={classes.navLinkWhite} to={`${process.env.PUBLIC_URL}/checkout`}>
         Checkout
+        </Link>
       </Button>
     </Container>
   );
